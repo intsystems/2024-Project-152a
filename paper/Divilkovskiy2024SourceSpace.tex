@@ -154,7 +154,7 @@ $\mathbf{x}_{t_i, k} \in \mathbb{R}$ задаёт собой значение р
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SameMatrix.png}
+	\includegraphics[width=\textwidth]{SameMatrix.jpg}
 	\label{fig:fig1}
 	\caption{Данные наборы временных рядов имеют одинаковую матрицу расстояний, построенную по евклидовой метрике.}
 \end{figure}
@@ -169,7 +169,7 @@ $\mathbf{x}_{t_i, k} \in \mathbb{R}$ задаёт собой значение р
 
 \textbf{Доказательство.} Достаточно показать, что метрика не является биекцией. Это будет означать, что существуют несколько различных пар рядов, расстояние между которыми одинаковое.
 
-Покажем, что метрика~--- непрерывная функция. Возьмём последовательность \[\{(x_n, y_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (x_n, y_n) \to (x, y).\] Тогда, \[x_n\to x, y_n\to y \Rightarrow d(x_n,x)\to 0 ,d(y_n,y)\to 0,\] $при n \to \infty.$ Воспользовавшись неравенством треугольника для метрики, получаем \[d(x_n,y_n)\leqslant d(x_n,x)+d(x,y)+d(y_n,y)\to d(x,y),\] следовательно, $d(x_n,y_n)\to d(x,y)$.
+Покажем, что метрика~--- непрерывная функция. Возьмём последовательность \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Тогда, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow d(\mathbf{x}_n,\mathbf{x})\to 0 ,d(\mathbf{y}_n,\mathbf{y})\to 0,\] $при n \to \infty.$ Воспользовавшись неравенством треугольника для метрики, получаем \[d(\mathbf{x}_n,\mathbf{y}_n)\leqslant d(\mathbf{x}_n,\mathbf{x})+d(\mathbf{x},\mathbf{y})+d(\mathbf{y}_n,\mathbf{y})\to d(\mathbf{x},\mathbf{y}),\] следовательно, $d(\mathbf{x}_n,\mathbf{y}_n)\to d(\mathbf{x},\mathbf{y})$.
 
 То есть метрика~--- непрерывное отображение из $\mathbb{R}^t \times \mathbb{R}^t$ в $\mathbb{R}$. Покажем, что такое отображение не может быть гомеоморфизмом. Предположим, что $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$~--- искомый гомеоморфизм. Возьмём некоторую точку $a \in \mathbb{R}$ и $f(a)$. Выкинув точку $a$, $\mathbb{R}$ перестаёт быть связным, а $\mathbb{R}^t \times \mathbb{R}^t$ нет. Значит, это не гомеоморфизм. Противоречие.
 $\blacksquare$
@@ -188,61 +188,61 @@ $\blacksquare$
 
 Матрица попарных расстояний строится следующим образом:
 \begin{gather*}
-	{\mathbf{\Sigma}}_T = \frac{1}{T} \sum_{t=1}^{T} (x_t - \mu_T)(x_t - \mu_T)^\mathsf{T},\\
-	\mu_T = \frac{1}{T} \sum_{t=1}^{T} x_t.
+	{\mathbf{\Sigma}}_T = \frac{1}{T} \sum_{t=1}^{T} (\mathbf{x}_t - \boldsymbol{\mu}_T)(\mathbf{x}_t - \boldsymbol{\mu}_T)^\mathsf{T},\\
+	\boldsymbol{\mu}_T = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t.
 \end{gather*}
 
 \textbf{Теорема 2.} \textit{В случае, если мы точно спрогнозировали матрицу расстояний, функция} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \textit{будет иметь два минимума, задающихся явно следующим образом:}
 
 \begin{align*}
-	\hat{y_i} &= y_i,\\
-	\hat{y_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} a_{ik} - y_i,
+	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
+	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i,
 \end{align*}
-\textit{где} $\hat{y}_i$~--- $i$\textit{-я координата предсказываемого значения ряда в момент $T+1$, $A=(a_{ik})$~--- исходный многомерный временной ряд,} $y_i$~--- \textit{истинные значения ряда в момент} $T+1$.
+\textit{где} $\hat{\mathbf{y}}_i$~--- $i$\textit{-я координата предсказываемого значения ряда в момент $T+1$, $\mathbf{A}=(\mathbf{a}_{ik})$~--- исходный многомерный временной ряд,} $y_i$~--- \textit{истинные значения ряда в момент} $T+1$.
 
-\textbf{Доказательство.} Обозначим за $\mathbf{\Sigma}$~--- истинную матрицу в момент времени $T$, а $\hat{\mathbf{\Sigma}}$~--- спрогнозированную. По построению, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (a^T_k - \mu_T)(a^T_k - \mu_T)^\intercal\texttt{}$. Матрица $A$ представляет собой транспонированную матрицу $X$ временных рядов, первая размерность~--- номер ряда, а не момент времени как в случае с $X$. Тогда, рассмотрим чему равны элементы матриц $\mathbf{\Sigma}$ и $\hat{\mathbf{\Sigma}}$.
+\textbf{Доказательство.} Обозначим за $\mathbf{\Sigma}$~--- истинную матрицу в момент времени $T$, а $\hat{\mathbf{\Sigma}}$~--- спрогнозированную. По построению, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (\mathbf{a}^T_k - \boldsymbol{\mu}_T)(\mathbf{a}^T_k - \boldsymbol{\mu}_T)^\intercal\texttt{}$. Матрица $\mathbf{A}$ представляет собой транспонированную матрицу $\mathbf{X}$ временных рядов, первая размерность~--- номер ряда, а не момент времени как в случае с $\mathbf{X}$. Тогда, рассмотрим чему равны элементы матриц $\mathbf{\Sigma}$ и $\hat{\mathbf{\Sigma}}$.
 
 \begin{align*}
-	\mathbf{\Sigma}_{ij} &= \frac{1}{T}\sum_{k=1}^{T}(a_{ik} - \mu_i)(a_{jk}-\mu_j),\\
-	\hat{\mathbf{\Sigma}}_{ij} &= \frac{1}{T}\sum_{k=1}^{T-1}(a_{ik} - \hat{\mu}_i)(a_{jk}-\hat{\mu}_j) + (y_i - \hat{\mu}_i)(y_j - \hat{\mu}_j).
+	\mathbf{\Sigma}_{ij} &= \frac{1}{T}\sum_{k=1}^{T}(\mathbf{a}_{ik} - \boldsymbol{\mu}_i)(\mathbf{a}_{jk}-\boldsymbol{\mu}_j),\\
+	\hat{\mathbf{\Sigma}}_{ij} &= \frac{1}{T}\sum_{k=1}^{T-1}(\mathbf{a}_{ik} - \hat{\boldsymbol{\mu}}_i)(\mathbf{a}_{jk}-\hat{\boldsymbol{\mu}}_j) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_j - \hat{\boldsymbol{\mu}}_j).
 \end{align*}
 
 Поскольку мы минимизируем норму разности, обе матрицы равны друг другу. Рассмотрим равенство диагональных элементов.
 
 \begin{gather*}
 	\text{Для любых } i, j \text{ таких, что } i = j \text{ верно: } \mathbf{\Sigma}_{ii} = \hat{\mathbf{\Sigma}}_{ii},\\
-	\sum_{k=1}^{T}(a_{ik} - \mu_i)(a_{ik}-\mu_i) = \sum_{k=1}^{T-1}(a_{ik} - \hat{\mu}_i)(a_{ik}-\hat{\mu}_i) + (y_i - \hat{\mu}_i)(y_i - \hat{\mu}_i),\\
-	(a_{iT}-\mu_i)^2 = (y_i-\hat{\mu}_i)^2.\\
-	\text{Распишем } \hat{\mu}_i \text{ и } \hat{\mu}:\\
-	\hat{\mu}_i = \frac{1}{T}\sum_{k=1}^{T-1}a_{ik} + \frac{1}{T}y_i,\\
-	\mu_i = \frac{1}{T}\sum_{k=1}^{T}a_{ik},\\
+	\sum_{k=1}^{T}(\mathbf{a}_{ik} - \boldsymbol{\mu}_i)(\mathbf{a}_{ik}-\boldsymbol{\mu}_i) = \sum_{k=1}^{T-1}(\mathbf{a}_{ik} - \hat{\boldsymbol{\mu}}_i)(\mathbf{a}_{ik}-\hat{\boldsymbol{\mu}}_i) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i),\\
+	(\mathbf{a}_{iT}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.\\
+	\text{Распишем } \hat{\boldsymbol{\mu}}_i \text{ и } \hat{\boldsymbol{\mu}}:\\
+	\hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik} + \frac{1}{T}\mathbf{y}_i,\\
+	\boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{a}_{ik},\\
 	\left[
 	\begin{array}{ll}
-		\frac{T-1}{T}y_i-\frac{1}{T}\sum_{k=1}^{T-1}a_{ik}=a_{iT}-\mu_i
+		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik}=\mathbf{a}_{iT}-\boldsymbol{\mu}_i
 		\\[1ex]
-		\frac{T-1}{T}y_i-\frac{1}{T}\sum_{k=1}^{T-1}a_{ik}=\mu_i-a_{iT}
+		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik}=\boldsymbol{\mu}_i-\mathbf{a}_{iT}
 	\end{array},
 	\right .\\[1ex]
 	\left[
 	\begin{array}{ll}
-		\frac{T-1}{T}y_i = \frac{T-1}{T}a_{iT}
+		\frac{T-1}{T}\mathbf{y}_i = \frac{T-1}{T}\mathbf{a}_{iT}
 		\\[1ex]
-		\frac{T_1}{T}y_i = \frac{2}{T} \sum_{k=1}^{T-1} a_{ik} - \frac{T-1}{T}a_{iT}
+		\frac{T_1}{T}\mathbf{y}_i = \frac{2}{T} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \frac{T-1}{T}\mathbf{a}_{iT}
 	\end{array},
 	\right .\\[1ex]
 	\left[
 	\begin{array}{ll}
-		y_i = a_{iT}
+		\mathbf{y}_i = \mathbf{a}_{iT}
 		\\[1ex]
-		y_i = \frac{2}{T-1} \sum_{k=1}^{T-1} a_{ik} - a_{iT}
+		\mathbf{y}_i = \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{a}_{iT}
 	\end{array}.
 	\right .
 \end{gather*}
 
 Переобозначив, получаем
 \begin{align*}
-	\hat{y_i} &= y_i,\\
-	\hat{y_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} a_{ik} - y_i.
+	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
+	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i.
 \end{align*}
 $$ \blacksquare $$
 
@@ -260,45 +260,45 @@ $$ \blacksquare $$
 
 Проблемой данного метода является вычислительная затратность методов невыпуклой оптимизации. В качестве альтернативы предлагается следующий метод, использующий только лишь сингулярное разложение матрицы.
 
-\textbf{Теорема 3. (Быстрый метод получения пары возможных ответов.)} \textit{Минимум функции $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ достигается на \[\pm\sqrt{\lambda_1} u_1 + \mu_t,\] где $\lambda_1$--- первое сингулярное значение, $u_1$--- первый левый сигнулярный вектор матрицы $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$}
+\textbf{Теорема 3. (Быстрый метод получения пары возможных ответов.)} \textit{Минимум функции $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ достигается на \[\pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t,\] где $\lambda_1$--- первое сингулярное значение, $\mathbf{u}_1$--- первый левый сигнулярный вектор матрицы $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$}
 
 \textbf{Доказательство.}
-Ниже используется обозначение $\mathbf{x}_i$~--- значение \textit{многомерного} временного ряда в момент времени $i$. В доказательстве выражается $\mathbf{\Sigma}_{t+1}$ через $\mathbf{\Sigma}_t$. После чего, используется свойство операторной нормы и ранга матрицы. Все приведенные ниже выражения верны для произвольных $\mu_T$ и $\mathbf{\Sigma}_T$, построенных по определению выше.
+Ниже используется обозначение $\mathbf{x}_i$~--- значение \textit{многомерного} временного ряда в момент времени $i$. В доказательстве выражается $\mathbf{\Sigma}_{t+1}$ через $\mathbf{\Sigma}_t$. После чего, используется свойство операторной нормы и ранга матрицы. Все приведенные ниже выражения верны для произвольных $\boldsymbol{\mu}_T$ и $\mathbf{\Sigma}_T$, построенных по определению выше.
 \begin{enumerate}
-	\item Выразим $\mu$ через значения ряда: \[\mu_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \Rightarrow \sum_{i=1}^{t} \mathbf{x}_i = t \mu_t.\]
+	\item Выразим $\boldsymbol{\mu}$ через значения ряда: \[\boldsymbol{\mu}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \Rightarrow \sum_{i=1}^{t} \mathbf{x}_i = t \boldsymbol{\mu}_t.\]
 	\item Аналогично выразим $\mathbf{\Sigma_t}$ через значения ряда:
 		\begin{gather*}
-		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} (\mathbf{x}_i-\mu_t)(\mathbf{x}_i-\mu_t)^\intercal;\\
-		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i\right) \mu_t^\intercal - \mu_t \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i^\intercal\right) + \mu_t \mu_t^\intercal = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \mu_t \mu_t^\intercal \Rightarrow\\
-		\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal = t \mathbf{\Sigma}_t + t \mu_t \mu_t^\intercal.
+		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} (\mathbf{x}_i-\boldsymbol{\mu}_t)(\mathbf{x}_i-\boldsymbol{\mu}_t)^\intercal;\\
+		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i\right) \boldsymbol{\mu}_t^\intercal - \boldsymbol{\mu}_t \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i^\intercal\right) + \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal \Rightarrow\\
+		\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal = t \mathbf{\Sigma}_t + t \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal.
 		\end{gather*}
 	\item Выразим $\mathbf{\Sigma_{t+1}}$ через $\mathbf{\Sigma_t}$, используя предыдущие выражения:
 	\begin{gather*}
-		\mathbf{\Sigma}_{t+1} = \frac{1}{t+1} \left(\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal + \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal \right) - \mu_{t+1} \mu_{t+1}^\intercal = \\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\mu_{t} \mu_{t}^\intercal + \frac{1}{t+1} \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal - \frac{1}{(t+1)^2} (t \mu_t + \mathbf{x}_{t+1})(t \mu_t + \mathbf{x}_{t+1})^\intercal =\\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\mu_{t} \mu_{t}^\intercal + \frac{t}{(t+1)^2} \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal - \frac{t^2}{(t+1)^2}\mu_{t} \mu_{t}^\intercal - \frac{t}{(t+1)^2}\mu_{t} \mathbf{x}_{t+1}^\intercal - \frac{t}{(t+1)^2}\mathbf{x}_{t+1} \mu_{t}^\intercal =\\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\mu_{t} \mu_{t}^\intercal - \frac{t}{(t+1)^2} \left( -\mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal + t\mu_{t} \mu_{t}^\intercal + \mu_{t} \mathbf{x}_{t+1}^\intercal + \mathbf{x}_{t+1} \mu_{t}^\intercal \right) =\\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\mu_{t} \mu_{t}^\intercal - \frac{t}{(t+1)^2} \left( -(\mathbf{x}_{t+1}-\mu_t)(\mathbf{x}_{t+1}-\mu_t)^\intercal + (t+1)\mu_{t} \mu_{t}^\intercal \right) =\\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\mu_{t} \mu_{t}^\intercal - \frac{t(t+1)}{(t+1)^2}\mu_{t} \mu_{t}^\intercal + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\mu_t)(\mathbf{x}_{t+1}-\mu_t)^\intercal =\\
-		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\mu_t)(\mathbf{x}_{t+1}-\mu_t)^\intercal.
+		\mathbf{\Sigma}_{t+1} = \frac{1}{t+1} \left(\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal + \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal \right) - \boldsymbol{\mu}_{t+1} \boldsymbol{\mu}_{t+1}^\intercal = \\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \frac{1}{t+1} \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal - \frac{1}{(t+1)^2} (t \boldsymbol{\mu}_t + \mathbf{x}_{t+1})(t \boldsymbol{\mu}_t + \mathbf{x}_{t+1})^\intercal =\\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \frac{t}{(t+1)^2} \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal - \frac{t^2}{(t+1)^2}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal - \frac{t}{(t+1)^2}\boldsymbol{\mu}_{t} \mathbf{x}_{t+1}^\intercal - \frac{t}{(t+1)^2}\mathbf{x}_{t+1} \boldsymbol{\mu}_{t}^\intercal =\\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal - \frac{t}{(t+1)^2} \left( -\mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal + t\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \boldsymbol{\mu}_{t} \mathbf{x}_{t+1}^\intercal + \mathbf{x}_{t+1} \boldsymbol{\mu}_{t}^\intercal \right) =\\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal - \frac{t}{(t+1)^2} \left( -(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)^\intercal + (t+1)\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal \right) =\\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal - \frac{t(t+1)}{(t+1)^2}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)^\intercal =\\
+		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)^\intercal.
 	\end{gather*}
-	Данное равенство выражает $\mathbf{\Sigma}_{t+1}$ через $\mathbf{\Sigma}_t$. Для дальнейшего доказательства полезно вывести следующее равенство для нашей задачи: \[(\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
+	Данное равенство выражает $\mathbf{\Sigma}_{t+1}$ через $\mathbf{\Sigma}_t$. Для дальнейшего доказательства полезно вывести следующее равенство для нашей задачи: \[(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
 	
 	\item Решается задача поиска минимума функции $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$. В нашем случае это аналогично равенству этой функции нулю. Распишем выражение под нормой:
 	\begin{gather*}
-		\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1} = \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\hat{\mathbf{x}}_{t+1}-\mu_t)(\hat{\mathbf{x}}_{t+1}-\mu_t)^\intercal - \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal =\\
-		=\frac{t}{(t+1)^2}(\hat{\mathbf{x}}_{t+1}-\mu_t)(\hat{\mathbf{x}}_{t+1}-\mu_t)^\intercal -\frac{t}{(t+1)^2}(\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal.
+		\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1} = \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal - \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal =\\
+		=\frac{t}{(t+1)^2}(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal -\frac{t}{(t+1)^2}(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal.
  	\end{gather*}
- 	Тогда, задача выше эквивалентна нахождению минимума функции \[||(\hat{\mathbf{x}}_{t+1}-\mu_t)(\hat{\mathbf{x}}_{t+1}-\mu_t)^\intercal-(\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal||_2^2.\]
- 	Обозначим \[\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
- 	Ранг матрицы ($\hat{\mathbf{x}}_{t+1}-\mu_t)(\hat{\mathbf{x}}_{t+1}-\mu_t)^\intercal$ равен 1, а поскольку искомый минимум равен 0, получается, что и ранг матрицы $\mathbf{A}$ будет равен 1.
+ 	Тогда, задача выше эквивалентна нахождению минимума функции \[||(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal-(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal||_2^2.\]
+ 	Обозначим \[\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
+ 	Ранг матрицы ($\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$ равен 1, а поскольку искомый минимум равен 0, получается, что и ранг матрицы $\mathbf{A}$ будет равен 1.
  	
  	\item Из прошлого пункта, матрица $\mathbf{A}$ имеет ранг 1. Распишем сингулярное разложение. \[
- 		\mathbf{A} = \sum_{i=1}^{1} \lambda_i u_i v_i^\intercal = \lambda_1 u_1 v_1^\intercal.
+ 		\mathbf{A} = \sum_{i=1}^{1} \lambda_i \mathbf{u}_i \mathbf{v}_i^\intercal = \lambda_1 \mathbf{u}_1 \mathbf{v}_1^\intercal.
  	\]
- 	С другой стороны, $\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\mu_t)(\bar{\mathbf{x}}_{t+1}-\mu_t)^\intercal$. Тогда, \[
- 	\bar{\mathbf{x}}_{t+1}-\mu_t = \pm\sqrt{\lambda_1} u_1 \Leftrightarrow\\
- 	\bar{\mathbf{x}}_{t+1} = \pm\sqrt{\lambda_1} u_1 + \mu_t.
+ 	С другой стороны, $\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$. Тогда, \[
+ 	\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t = \pm\sqrt{\lambda_1} \mathbf{u}_1 \Leftrightarrow\\
+ 	\bar{\mathbf{x}}_{t+1} = \pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t.
  	\]
  	Знак $\pm$ возникает из того, что в случае симметричной матрицы, имеют место два сингулярных разложения: $\mathbf{A}=\mathbf{U}\mathbf{\Sigma} \mathbf{V}^\intercal=(-\mathbf{U})\mathbf{\Sigma} (-\mathbf{V})^\intercal$.
  	$$ \blacksquare $$
@@ -330,7 +330,7 @@ $$ \blacksquare $$
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{TwoTAlgo.png}
+	\includegraphics[width=\textwidth]{TwoTAlgo.jpg}
 	\caption{Возвращение прогноза при точном прогнозе $\mathbf{\Sigma}$. $T=20$, $T'=10$}
 	\label{fig:fig3}
 \end{figure}
@@ -358,7 +358,7 @@ $$ \blacksquare $$
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{TbiLSTM.png}
+	\includegraphics[width=\textwidth]{TbiLSTM.jpg}
 	\caption{Возвращение прогноза при неточном прогнозе $\mathbf{\Sigma}$}
 	\label{fig:fig4}
 \end{figure}
@@ -383,7 +383,7 @@ $$ \blacksquare $$
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{K10N005.png}
+	\includegraphics[width=\textwidth]{K10N005.jpg}
 	\caption{График восстановления синтетических данных при $K=10$, Добавочный шум $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.116, MSE: 0.025}}
 	\label{fig:fig6}
 \end{figure}
@@ -394,7 +394,7 @@ $$ \blacksquare $$
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{K10N005_electicity.png}
+	\includegraphics[width=\textwidth]{K10N005_electicity.jpg}
 	\caption{График восстановления данных ETTh1 при $K=10$, Добавочный шум $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.096, MSE: 0.019}}
 	\label{fig:fig7}
 \end{figure}
