@@ -135,10 +135,10 @@ The existence of several solutions to the minimization problem described above i
 
 Consider the recovery of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
 
-Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ d : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, which satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = d(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vectors.
+Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, which satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vectors.
 
 One of the frequently used metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. Using its example, we will show that there can be several suitable answers with the same values of distance matrix. Moreover, in the case of the Euclidean metric, the number of answers is infinite,
-\[\mathbf{\Sigma}_{i,j} = d(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2}.\]
+\[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2}.\]
 
 Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
 \[
@@ -158,13 +158,13 @@ However, even using other metrics does not get rid of the problem. This results 
 
 However, even using other metrics does not get rid of the problem. In theorem below we show that usage of only one matrix is insufficient for the problem of recovering values of time series.
 
-\textbf{Theorem 1.} \textit{For any metric $d$ defined in the time series space $\mathbb{R}^t$ there is more than one way to recover the original time series from the pairwise distance matrix constructed by the given metric.}	
+\textbf{Theorem 1.} \textit{For any metric $\rho$ defined in the time series space $\mathbb{R}^t$ there is more than one way to recover the original time series from the pairwise distance matrix constructed by the given metric.}	
 
 \textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. The usage of information about the previous moments of time is given after this section.
 
 \textbf{Proof}. We only have to show that the metric is not a bijection. This will mean that there are several different pairs of rows whose distance between them is the same.
 
-Let us show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow d(\mathbf{x}_n,\mathbf{x})\to 0 ,d(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, we obtain \[d(\mathbf{x}_n,\mathbf{y}_n)\leqslant d(\mathbf{x}_n,\mathbf{x})+d(\mathbf{x},\mathbf{y})+d(\mathbf{y}_n,\mathbf{y})\to d(\mathbf{x},\mathbf{y}),\] therefore, $d(\mathbf{x}_n,\mathbf{y}_n)\to d(\mathbf{x},\mathbf{y})$.
+Let us show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, we obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
 
 Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such a mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction.
 $\blacksquare$
