@@ -7,45 +7,45 @@ Warning--empty journal in MDS
 Warning--empty booktitle in SSA
 Warning--empty publisher in inbook
 Warning--can't use both volume and number fields in haoyietal-informer-2021
-You've used 17 entries,
+You've used 18 entries,
             2118 wiz_defined-function locations,
-            588 strings with 7126 characters,
-and the built_in function-call counts, 6168 in all, are:
-= -- 534
-> -- 419
+            596 strings with 7277 characters,
+and the built_in function-call counts, 6450 in all, are:
+= -- 563
+> -- 426
 < -- 4
-+ -- 163
-- -- 145
-* -- 444
-:= -- 1044
-add.period$ -- 48
-call.type$ -- 17
-change.case$ -- 119
++ -- 166
+- -- 147
+* -- 462
+:= -- 1092
+add.period$ -- 51
+call.type$ -- 18
+change.case$ -- 123
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 206
-empty$ -- 445
-format.name$ -- 145
-if$ -- 1266
+cite$ -- 22
+duplicate$ -- 217
+empty$ -- 471
+format.name$ -- 147
+if$ -- 1326
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 13
-newline$ -- 83
-num.names$ -- 36
-pop$ -- 164
+int.to.str$ -- 18
+missing$ -- 14
+newline$ -- 88
+num.names$ -- 38
+pop$ -- 166
 preamble$ -- 1
-purify$ -- 103
+purify$ -- 106
 quote$ -- 0
-skip$ -- 161
+skip$ -- 168
 stack$ -- 0
-substring$ -- 219
-swap$ -- 46
+substring$ -- 245
+swap$ -- 47
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 66
+type$ -- 70
 warning$ -- 4
-while$ -- 43
-width$ -- 19
-write$ -- 169
+while$ -- 46
+width$ -- 20
+write$ -- 180
 (There were 4 warnings)

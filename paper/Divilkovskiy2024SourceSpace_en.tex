@@ -84,7 +84,7 @@ pdfauthor={Maxim Divilkovskiy},
 \maketitle
 
 \begin{abstract}
-	We are researching the problem of pointwise forecasting of a set of time series with high covariance and high variance. To solve this problem we propose considering the space of pairwise distances between time series. In this space the pairwise distance matrix is predicted and then the time series values at the next time moment are reconstructed using the known matrix. In this paper we propose several methods for recovering a prediction in time series space from a known pairwise distance matrix. We show the existence of multiple time series values satisfying the same pairwise distance matrix. We propose two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. Also, the paper derives an explicit view of the recovered values through the pairwise correlation matrix. In addition, we derive an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space, but in the space of pairwise distances.
+	We are researching the problem of pointwise forecasting of a set of time series with high covariance and high variance. To solve this problem we propose considering the space of pairwise distances between time series. In this space the pairwise distance matrix is predicted and then the time series values at the next time moment are reconstructed using the known matrix. In this paper we propose several methods for reconstruction a prediction in time series space from a known pairwise distance matrix. We show the existence of multiple time series values satisfying the same pairwise distance matrix. We propose two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. Also, the paper derives an explicit view of the reconstructed values through the pairwise correlation matrix. In addition, we derive an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space, but in the space of pairwise distances.
 
 
 \end{abstract}
@@ -99,7 +99,7 @@ pdfauthor={Maxim Divilkovskiy},
 	
 	Several recent studies \cite{haoyietal-informer-2021} \cite{haoyietal-informerEx-2023} \cite{wu2021autoformer} \cite{liu2022pyraformer} are based on usage of popular transformer-based models. They were originally proposed for the natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems dealing with text as a sequence in time, same approaches may be used for time series predicting. Crossformer \cite{zhang2023crossformer} model uses cross-dimensional dependency, however it does not explicitly model distance function between time series.
 	
-	Further, we study conditions on the distance function between rows under which there is a way to recover the values of time series. The insufficiency of one matrix to recover the answer is proved. Two methods using several matrices are proposed for the case of accurate forecast and for the case of forecast with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series forecasting.
+	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of time series. The insufficiency of one matrix to reconstruct the answer is proved. Two methods using several matrices are proposed for the case of accurate forecast and for the case of forecast with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series forecasting.
 
 \section{Formulation of the problem of pointwise forecasting of a set of time series}
 
@@ -140,7 +140,7 @@ Each $\mathbf{\Sigma}_i$~--- is a matrix of pairwise distances of size $d \times
 
 \section{Existence of several values of a series satisfying same distance matrix}
 
-The existence of several solutions to the minimization problem described above is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to recover several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
+The existence of several solutions to the minimization problem described above is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to reconstruct several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
 
 Consider the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
 
@@ -163,11 +163,11 @@ In the case of the time series prediction problem, this property is critical bec
 	\label{fig:fig1}
 \end{figure}
 
-However, even using other metrics does not get rid of the problem. This results in the inability to use the classical Multidimentional Scaling \cite{MDS} algorithm to recover the response to the source time series space. This algorithm is often used to recover objects from their pairwise distances. Metric MDS Algorithm  \cite{inbook} may be used if distances are not euclidean.
+However, even using other metrics does not get rid of the problem. This results in the inability to use the classical Multidimentional Scaling \cite{MDS} algorithm to reconstruct the result to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances. Metric MDS Algorithm  \cite{inbook} may be used if distances are not euclidean.
 
-In the theorem below we show that usage of only one matrix is insufficient for the problem of recovering values of time series.
+In the theorem below we show that usage of only one matrix is insufficient for the problem of reconstructing values of time series.
 
-\textbf{Theorem 1.} \textit{For any metric $\rho$ defined in the time series space $\mathbb{R}^t$ there is more than one way to recover the original time series from the pairwise distance matrix constructed by the given metric.}	
+\textbf{Theorem 1.} \textit{For any metric $\rho$ defined in the time series space $\mathbb{R}^t$ there is more than one way to reconstruct the original time series from the pairwise distance matrix constructed by the given metric.}	
 
 \textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. The usage of information about the previous moments of time is considered after this section.
 
@@ -184,7 +184,7 @@ Thus, knowing only the distance matrix it is impossible to unambiguously reconst
 
 Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$ using the value of the time series before the time moment $t$: $\mathbf{X}=[\mathbf{x_1}, \ldots, \mathbf{x_{t}}]$. The problem is reformulated as follows:
 
-There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. We also know the distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. It is required to recover the ($t+1$)'th coordinate of each of the objects. In time series terms, the ($t+1$)'th coordinate is the value of each of the series at that moment in time.
+There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. We also know the distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. It is required to calculate the ($t+1$)'th coordinate of each of the objects. In time series terms, the ($t+1$)'th coordinate is the value of each of the series at that moment in time.
 
 \section{Pairwise correlation between time series as the distance function}
 
@@ -248,7 +248,7 @@ Redefining, we obtain
 \end{align*}
 $$ \blacksquare $$
 
-\textbf{Corollary. (A trivial method for obtaining a pair of possible answers.)} This theorem shows that using pairwise correlation as a distance function gives at most \textit{two} different answers when recovering. Moreover, having obtained one, one can explicitly find the second one. Then, to find both possible answers, it is proposed to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
+\textbf{Corollary. (A trivial method for obtaining a pair of possible answers.)} This theorem shows that using pairwise correlation as a distance function gives at most \textit{two} different answers when reconstructing. Moreover, having obtained one, we can explicitly find the second one. Then, to find both possible answers, it is proposed to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
 
 \begin{figure}[H]
 	\centering
@@ -294,7 +294,7 @@ The problem with this method is the computational cost of non-convex optimisatio
  	Denote \[\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
  	The rank of the matrix ($\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$ is 1, and since the desired minimum is 0, it turns out that the rank of the matrix $\mathbf{A}$ is also 1.
  	
- 	\item From the previous paragraph, the matrix $\mathbf{A}$ has rank 1. Let us write the singular value decomposition. \[
+ 	\item From the previous paragraph, the matrix $\mathbf{A}$ has rank 1. Consider the singular value decomposition. \[
  		\mathbf{A} = \sum_{i=1}^{1} \lambda_i \mathbf{u}_i \mathbf{v}_i^\intercal = \lambda_1 \mathbf{u}_1 \mathbf{v}_1^\intercal.
  	\]
  	On the other hand, $\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$. Then, \[
@@ -307,23 +307,26 @@ The problem with this method is the computational cost of non-convex optimisatio
 
 This theorem allows us to find both minimums of a function much faster than with standard non-convex optimisation methods \cite{mikhalevich2024methodsnonconvexoptimization}.
 
-\section{Algorithm for recovering time series values in case of accurate prediction of the matrix}
+\section{Algorithm for reconstructing time series values in case of accurate prediction of the matrix}
 
-Theorems 2 and 3 show that using a single pairwise correlation matrix and information about the first $t$ moments of time allows us to obtain a \textit{pair} of possible values after recovery. In this section, we propose a method to select the true value from the obtained \textit{pair} $\mathbf{\Sigma}_{t+1}$ \textit{predicted accurately}.
+Theorems 2 and 3 show that using a \textit{single} pairwise correlation matrix and information about the first $t$ moments of time allows us to obtain a \textit{pair} of possible values after recovery. In this section, we propose a method to select the true value from the obtained \textit{pair} $\mathbf{\Sigma}_{t+1}$ \textit{predicted accurately}.
 
-The algorithm described below is based on the use of \textit{two} predicted matrices corresponding to different intervals of time. Two different values $T, T^\prime$ are chosen. Two matrices are predicted:
+The algorithm described below is based on the use of \textit{two} predicted matrices corresponding to different subsegments of time. Two different values $T, T^\prime$ are chosen. Two matrices are predicted:
 
-First $\mathbf{\Sigma}_{t+1}^1$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
+First matrix $\mathbf{\Sigma}_{t+1}^1$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
 
-Second $\mathbf{\Sigma}_{t+1}^2$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T‘+2$ to $t+1$ (in total $T^\prime$ values).
+Second matrix $\mathbf{\Sigma}_{t+1}^2$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T‘+2$ to $t+1$ (in total $T^\prime$ values).
 
-Hence, when we reconstruct answers from these matrices, we obtain two pairs of answers, each of which is a candidate for the true answer. At the same time, a true answer exists in each of the pairs. It is suggested to take the answer from the intersection. We does not consider the case when the intersection size is 2, since the probability of this situation is 0 when using continuous values.
+Hence, when we reconstruct answers from these matrices, we obtain two pairs of answers, each of which is a candidate for the true answer. At the same time, a true answer exists in each of the pairs. We suggest to take the answer from the intersection. We does not consider the case when the intersection size is 2, since the probability of this situation is 0 when using continuous values.
 
 Algorithm scheme:
 
 \begin{enumerate}
 	\item Take $T$ and $T^\prime: T \neq T'$.
-	\item For $T$ and $T^\prime$ perform the above algorithm and obtain the answer sets: \[ [\hat{\mathbf{x}}_{t+1}^1, \hat{\mathbf{x}'}_{t+1}^1], [\hat{\mathbf{x}}_{t+1}^2, \hat{\mathbf{x}'}_{t+1}^2].\]
+	\item For $T$ and $T^\prime$ perform the above algorithm and obtain the answer sets: 
+	\begin{gather*}
+	 [\hat{\mathbf{x}}_{t+1}^1, \hat{\mathbf{x}}^{\prime 1}_{t+1}],\\ [\hat{\mathbf{x}}_{t+1}^2, \hat{\mathbf{x}}^{\prime 2}_{t+1}].
+	 \end{gather*}
 	\item Find the answer that lies in the intersection.
 	In real data, the probability of matching sets of answers is 0, just as it is in synthetic data with random noise added.
 \end{enumerate}
@@ -336,26 +339,26 @@ Algorithm scheme:
 	\label{fig:fig3}
 \end{figure}
 
-\section{Algorithm for recovering time series values in case of inaccurate matrix prediction}
+\section{Algorithm for reconstructing time series values in case of inaccurate matrix prediction}
 
 The problem with the above algorithm is that if the prediction is inaccurate, there may be no intersection. This happens because the error in each of the predicted matrices is different. For this, the following algorithm is proposed to amortise the error:
 
-Instead of two values of $T$ and $T^\prime$, $K$ values are taken.
-Next, each matrix is reduced to the nearest positive semi-definite matrix.
-Then we get $K$ sets of answers:
+Instead of two values of $T$ and $T^\prime$, we propose take $K$ values. We get $K$ matrices with some noise that came from inaccuracy in prediction. Thus, each matrix is reduced to the nearest positive semi-definite matrix. Algorithm is explained in \cite{HIGHAM1988103}.
+Then, for each value algorithm for obtaining the pair of possible answers is applied.
+We get $K$ sets of answers:
 \begin{gather*}
 	[\hat{\mathbf{x}}_{t+1}^1, \hat{\mathbf{x}}^{\prime 1}_{t+1}],\\
 	[\hat{\mathbf{x}}_{t+1}^2, \hat{\mathbf{x}}^{\prime 2}_{t+1}],\\
 	\vdots \\
 	[\hat{\mathbf{x}}_{t+1}^K, \hat{\mathbf{x}}^{\prime K}_{t+1}].
 \end{gather*}
-Then we propose to search through $2^K$ sets of answers and choose the set in which the diameter is minimal. The diameter of set is calculated as maximum Euclidean distance between two different points in set. It is a \textit{necessary} condition for the actual answer. In other words, the one that is the intersection of all pairs of answers. In the case of an accurate prediction, the diameter of such a set will always be zero.
+Then we propose to search through $2^K$ sets of answers and choose the set in which the diameter is minimal. The diameter of set is calculated as maximum Euclidean distance between two different points in set. It is a \textit{necessary} condition for the actual answer. In the case of an accurate prediction, the diameter of such a set will always be zero.
 
-The asymptotic complexity of this recovery will be $O(2^K \times K \times N)$ $+$ the complexity of the minimum search algorithm used.
+The asymptotic complexity of this reconstruction will be $O(2^K \times K \times N)$ $+$ the complexity of the minimum search algorithm used.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{NonIdealRecovery.eps}
-	\caption{Prediction recovery in case of inaccurate correlation matrix $\mathbf{\Sigma}$ prediction. In addition to the prediction error caused by noise in the correlation matrix a new type of error is added. When selecting a set, it is possible that the diameter is minimised not at the right set, as this is only a necessary condition, but not a sufficient one.}
+	\caption{Prediction reconstruction in case of inaccurate correlation matrix $\mathbf{\Sigma}$ prediction. In addition to the prediction error caused by noise in the correlation matrix a new type of error is added. When selecting a set, it is possible that the diameter is minimised not at the right set, as this is only a necessary condition, but not a sufficient one.}
 	\label{fig:fig4}
 \end{figure}
 
@@ -365,7 +368,7 @@ In this section we test the algorithm when the pairwise correlation matrix predi
 
 \paragraph{Synthetic data.}\
 
-The table below shows the error values after recovery under different conditions. Generated data consisting of a combination of noisy sines and cosines are used.
+The table below shows the error values after reconstruction the time series values under different conditions. Generated data consisting of a combination of noisy sines and cosines is used.
 
 \begin{table}[!h]
 \def\arraystretch{2.3}
@@ -385,7 +388,7 @@ The table below shows the error values after recovery under different conditions
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{synthetic_time_series_K10N005.eps}
-	\caption{Synthetic data recovery plot at $K=10$, Additional noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.116, MSE: 0.025}}
+	\caption{Synthetic data reconstruction plot at $K=10$, Additional noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.116, MSE: 0.025}}
 	\label{fig:fig6}
 \end{figure}
 
@@ -396,7 +399,7 @@ The following is a similar table for the Electricity Transformer Temperature dat
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ETT_time_series_K10N005.eps}
-	\caption{ETTh1 data recovery plot at $K=10$, Additional Noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.096, MSE: 0.019}}
+	\caption{ETTh1 data reconstruction plot at $K=10$, Additional Noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.096, MSE: 0.019}}
 	\label{fig:fig7}
 \end{figure}
 
@@ -418,11 +421,11 @@ The following is a similar table for the Electricity Transformer Temperature dat
 In all cases, using more different values of $T$ predictably gave the highest accuracy. However, for $K > 15$ the algorithm becomes too computationally complex due to the exponential dependence on $K$.
 
 \section{Conclusion}
-The paper investigates an approach to time series forecasting using a pairwise correlation matrix between series. It is shown that the use of only one matrix leads to the existence of a pair of possible answers~--- the values of the series at the next moment of time. An explicit formula for computing one answer through the other is derived, which allows the problem to be solved using nonconvex optimisation. Moreover, an explicit form of the pair of answers via the singular value decomposition of the pairwise correlation matrix is derived. Two algorithms are proposed to identify the desired answer from a pair of possible answers. The first one relies on the exact prediction of the pairwise correlation matrix. The second one admits the presence of an error in the prediction, but it is more computationally demanding.
+The paper investigates an approach to time series forecasting using a pairwise correlation matrix between series. It is shown that the use of only one matrix leads to the existence of a pair of possible values of the series at the next moment of time. An explicit formula for computing one answer through the other is derived, which allows the problem to be solved using non-convex optimisation. Moreover, an explicit form of the pair of answers via the singular value decomposition of the pairwise correlation matrix is derived. Two algorithms are proposed to identify the desired answer from a pair of possible answers. The first one relies on the exact prediction of the pairwise correlation matrix. The second one admits the presence of an error in the prediction, but it is more computationally demanding.
 
 The future development of the study is to find a way to predict the pairwise correlation matrix with high accuracy. Using basic regression models give insufficiently accurate results. In such a prediction, errors are often made by incorrectly selecting the set of answers from Algorithm 2. 
 
-Also, the side of development can be the estimation of the error radius when recovering the value of time series from the matrix of pair correlations. In addition, it makes sense to consider other functions of pairwise distance as a metric.
+Also, the side of development can be the estimation of the error radius when reconstructing the value of time series from the matrix of pair correlations. In addition, it makes sense to consider other functions of pairwise distance as a metric.
 
 \bibliography{references}
 \bibliographystyle{plain}

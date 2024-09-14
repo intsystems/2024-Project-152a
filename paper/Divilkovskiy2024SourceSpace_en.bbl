@@ -15,6 +15,11 @@ James~B. Elsner and Anastasios~A. Tsonis.
 \newblock Singular spectrum analysis: A new tool in time series analysis.
 \newblock 1996.
 
+\bibitem{HIGHAM1988103}
+Nicholas~J. Higham.
+\newblock Computing a nearest symmetric positive semidefinite matrix.
+\newblock {\em Linear Algebra and its Applications}, 103:103--118, 1988.
+
 \bibitem{LSTM}
 Sepp Hochreiter and Jürgen Schmidhuber.
 \newblock Long short-term memory.
