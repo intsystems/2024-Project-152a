@@ -32,6 +32,13 @@
 	MIPT\\
 	\texttt{divilkovskii.mm@phystech.edu} \\
 	%% examples of more authors
+	\And Gleb Karpeev \\
+	% \thanks{Use footnote for providing further
+		% 		information about author (webpage, alternative
+		% 		address)---\emph{not} for acknowledging funding agencies.} \\
+	MIPT\\
+	\texttt{karpeev.ga@phystech.edu} \\
+	%% examples of more authors
 	\And
 	Vadim Strijov \\
 	FRC CSC of the RAS\\
@@ -83,14 +90,16 @@ pdfauthor={Maxim Divilkovskiy},
 \end{abstract}
 
 
-\keywords{Metric \and Non-Convex Optimization \and Correlation \and Time Series Forecasting}
+\keywords{Metric \and Non-Convex Optimization \and Singular Value Decomposition \and Pearson Correlation Coefficient \and Time Series Forecasting}
 
 \section{Introduction}
-	Our purpose is to present a new method for pointwise time series forecasting. Considered time series are characterized by high pairwise covariance and high variance. The task of pointwise forecasting is to calculate the values of time series at the next point in time using the available historical data for the previous several points in time. The task is divided into three stages: first, the initial space of time series is transformed into a metric space by constructing a matrix of pairwise distances. Then the prediction of the matrix of pairwise distances at the next moment of time is carried out in this space. In the theoretical part of the paper, we show the necessity of predicting at least two matrices. We also show that the uniqueness of the answer requires the use of several matrices corresponding to different time intervals. In the last step, the predicted matrices are used to return the result into the original space. We focus mostly on the last step. Experiments are presented for the case of accurate matrix prediction with the addition of normal noise to the values.
+ 	In this research we present a new method for pointwise time series forecasting. Considered time series are characterized by high pairwise covariance and high variance. The task of pointwise forecasting is to calculate the values of time series at the next point in time using the available historical data for the previous several points in time. The task is divided into three stages: first, the initial space of time series is transformed into a metric space by constructing a matrix of pairwise distances. Then the prediction of the matrix of pairwise distances at the next moment of time is done in the metric space. In the theoretical part of the paper, we show the necessity of predicting at least two matrices. We also show that the uniqueness of the answer requires the use of several matrices corresponding to different time intervals. In the last step, the predicted matrices are used to reconstruct the result into the original space. We focus mostly on the last step. Experiments are presented for the case of accurate matrix prediction with the addition of normal noise to the values.
 
 	Existing time series prediction methods such as LSTM \cite{LSTM}, SSA \cite{SSA} and other \cite{Biosignals}, \cite{boyd2017multiperiod} are based on predicting the value of a single series. These methods can be modified to forecast also a set of time series. For this purpose, it is sufficient to consider a set of series as one multivariate series. However, this approach does not explicitly model the dependencies between different series. In this paper, we propose to analyze the change in \textit{set} of time series. This approach explicitly uses the relationships between them as information. A similar study is carried out in the \cite{MulticorrelatedQuadratic} paper, but it emphasizes on the feature selection task. This task consists in selecting such a subset of the original time series for which it is possible to make a forecast of sufficient quality.
 	
-	Further, we consider conditions on the distance function between rows under which there is a way to recover the values of time series. The insufficiency of one matrix to recover the answer is proved. Two methods using several matrices are proposed for the case of accurate forecast and for the case of forecast with non-zero noise. Also, we propose a recovery algorithm based on two theorems about the explicit form of the response using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article\cite{jadon2022comprehensive} that they are the most suitable for the task of time series forecasting.
+	Several recent studies \cite{haoyietal-informer-2021} \cite{haoyietal-informerEx-2023} \cite{wu2021autoformer} \cite{liu2022pyraformer} are based on usage of popular transformer-based models. They were originally proposed for the natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems dealing with text as a sequence in time, same approaches may be used for time series predicting. Crossformer \cite{zhang2023crossformer} model uses cross-dimensional dependency, however it does not explicitly model distance function between time series.
+	
+	Further, we study conditions on the distance function between rows under which there is a way to recover the values of time series. The insufficiency of one matrix to recover the answer is proved. Two methods using several matrices are proposed for the case of accurate forecast and for the case of forecast with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series forecasting.
 
 \section{Formulation of the problem of pointwise forecasting of a set of time series}
 
@@ -123,21 +132,21 @@ Prediction errors are calculated using the following equations:
 	[\mathbf{x}_{t-s}, \ldots, \mathbf{x}_t] &\rightarrow \mathbf{\Sigma}_{t}.
 \end{align*}
 
-Each $\mathbf{\Sigma}_i$~--- are matrices of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between rows $i$ and $j$. The construction formula as well as the choice of the distance function are described in the following sections.
+Each $\mathbf{\Sigma}_i$~--- is a matrix of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between rows $i$ and $j$. The construction formula as well as the choice of the distance function are described in the following sections.
 
 2. The matrix $\hat{\mathbf{\Sigma}}_{t+1}$ is predicted from these matrices.
 
-3. Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \] is minimal, where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is non-convex and there can be several minimums. We address this problem in the following sections.
+3. Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \] is minimal, where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \textit{non-convex} and there can be several minimums. We address this problem in the following sections.
 
 \section{Existence of several values of a series satisfying same distance matrix}
 
-The existence of several solutions to the minimization problem described above is the central problem we consider in this paper. In this section we show that by one matrix constructed by an arbitrary metric it is possible to recover several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
+The existence of several solutions to the minimization problem described above is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to recover several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
 
-Consider the recovery of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
+Consider the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
 
-Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, which satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vectors.
+Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, which satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vector with value.
 
-One of the frequently used metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. Using its example, we will show that there can be several suitable answers with the same values of distance matrix. Moreover, in the case of the Euclidean metric, the number of answers is infinite,
+One of the fundamentally metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. On this example, we will show that there can be several suitable answers with the same values of distance matrix. Moreover, in the case of the Euclidean metric, the number of answers is infinite, which is shown below:
 \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2}.\]
 
 Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
@@ -154,15 +163,15 @@ In the case of the time series prediction problem, this property is critical bec
 	\label{fig:fig1}
 \end{figure}
 
-However, even using other metrics does not get rid of the problem. This results in the inability to use the classical Multidimentional Scaling \cite{MDS} algorithm to recover the response to the source time series space. This algorithm is often used to recover objects from their pairwise distance. Metric MDS may be used if distances are not euclidean.
+However, even using other metrics does not get rid of the problem. This results in the inability to use the classical Multidimentional Scaling \cite{MDS} algorithm to recover the response to the source time series space. This algorithm is often used to recover objects from their pairwise distances. Metric MDS Algorithm  \cite{inbook} may be used if distances are not euclidean.
 
-However, even using other metrics does not get rid of the problem. In theorem below we show that usage of only one matrix is insufficient for the problem of recovering values of time series.
+In the theorem below we show that usage of only one matrix is insufficient for the problem of recovering values of time series.
 
 \textbf{Theorem 1.} \textit{For any metric $\rho$ defined in the time series space $\mathbb{R}^t$ there is more than one way to recover the original time series from the pairwise distance matrix constructed by the given metric.}	
 
-\textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. The usage of information about the previous moments of time is given after this section.
+\textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. The usage of information about the previous moments of time is considered after this section.
 
-\textbf{Proof}. We only have to show that the metric is not a bijection. This will mean that there are several different pairs of rows whose distance between them is the same.
+\textbf{Proof}. We only have to show that the metric is not a bijection. This will mean that there are several different pairs of series whose distance between them is the same.
 
 Let us show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, we obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
 
@@ -175,11 +184,11 @@ Thus, knowing only the distance matrix it is impossible to unambiguously reconst
 
 Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$ using the value of the time series before the time moment $t$: $\mathbf{X}=[\mathbf{x_1}, \ldots, \mathbf{x_{t}}]$. The problem is reformulated as follows:
 
-There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. We also know the distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. It is required to recover the $t+1$ coordinate of each of the objects. In time series terms, the $t+1$-coordinate is the value of each of the series at that moment in time.
+There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. We also know the distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. It is required to recover the ($t+1$)'th coordinate of each of the objects. In time series terms, the ($t+1$)'th coordinate is the value of each of the series at that moment in time.
 
 \section{Pairwise correlation between time series as the distance function}
 
-This section investigates the time series values recovery using the pairwise correlation matrix. This distance function is used because it is shown in the article\cite{puchkin2023sharper} that the pairwise correlation estimate of a sample approximates its mathematical expectation.
+In this section we investigates the time series values reconstruction using the pairwise correlation matrix. This distance function is used because it is shown in the article \cite{puchkin2023sharper} that the pairwise correlation estimate of a sample approximates its mathematical expectation.
 
 The pairwise distance matrix is constructed as follows:
 \begin{gather*}
@@ -187,11 +196,11 @@ The pairwise distance matrix is constructed as follows:
 	\boldsymbol{\mu}_T = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t.
 \end{gather*}
 
-\textbf{Theorem 2.} \textit{In the case where we have accurately predicted the distance matrix, the function} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \textit{will have two minimums, defined explicitly as follows:}
+\textbf{Theorem 2.} \textit{In the case of accurately predicted distance matrix, the function} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \textit{will have two minimums, defined explicitly as follows:}
 
 \begin{align*}
-	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
-	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i,
+	\hat{\mathbf{y}}_i &= \mathbf{y}_i,\\
+	\hat{\mathbf{y}}_i &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i,
 \end{align*}
 \textit{where} $\hat{\mathbf{y}}_i$~--- $i$\textit{-th coordinate of the predicted value of the series at the moment $T+1$, $\mathbf{A}=(\mathbf{a}_{ik})$ is given multivariate time series,} $y_i$ \textit{are true values of the series at the moment} $T+1$.
 
