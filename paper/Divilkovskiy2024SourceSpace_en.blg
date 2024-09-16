@@ -1,51 +1,51 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Divilkovskiy2024SourceSpace_en.aux
-The style file: plain.bst
+The style file: ieeetr.bst
 Database file #1: references.bib
-Warning--empty journal in MDS
 Warning--empty booktitle in SSA
-Warning--empty publisher in inbook
 Warning--can't use both volume and number fields in haoyietal-informer-2021
+Warning--empty journal in MDS
+Warning--empty publisher in inbook
 You've used 18 entries,
-            2118 wiz_defined-function locations,
-            596 strings with 7277 characters,
-and the built_in function-call counts, 6450 in all, are:
-= -- 563
-> -- 426
-< -- 4
-+ -- 166
-- -- 147
-* -- 462
-:= -- 1092
-add.period$ -- 51
+            1876 wiz_defined-function locations,
+            576 strings with 6754 characters,
+and the built_in function-call counts, 4420 in all, are:
+= -- 358
+> -- 268
+< -- 0
++ -- 95
+- -- 77
+* -- 322
+:= -- 657
+add.period$ -- 19
 call.type$ -- 18
-change.case$ -- 123
+change.case$ -- 17
 chr.to.int$ -- 0
 cite$ -- 22
 duplicate$ -- 217
-empty$ -- 471
-format.name$ -- 147
-if$ -- 1326
+empty$ -- 423
+format.name$ -- 77
+if$ -- 1053
 int.to.chr$ -- 0
 int.to.str$ -- 18
 missing$ -- 14
-newline$ -- 88
-num.names$ -- 38
-pop$ -- 166
+newline$ -- 58
+num.names$ -- 20
+pop$ -- 100
 preamble$ -- 1
-purify$ -- 106
+purify$ -- 0
 quote$ -- 0
-skip$ -- 168
+skip$ -- 146
 stack$ -- 0
-substring$ -- 245
-swap$ -- 47
-text.length$ -- 4
+substring$ -- 158
+swap$ -- 74
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
+type$ -- 0
 warning$ -- 4
-while$ -- 46
+while$ -- 30
 width$ -- 20
-write$ -- 180
+write$ -- 154
 (There were 4 warnings)

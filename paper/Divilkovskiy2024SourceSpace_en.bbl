@@ -1,109 +1,89 @@
 \begin{thebibliography}{10}
 
-\bibitem{boyd2017multiperiod}
-Stephen Boyd, Enzo Busseti, Steven Diamond, Ronald~N. Kahn, Kwangmoo Koh, Peter
-  Nystrup, and Jan Speth.
-\newblock Multi-period trading via convex optimization, 2017.
-
-\bibitem{MDS}
-Mark Davison and Stephen Sireci.
-\newblock Multidimensional scaling.
-\newblock 10 2012.
+\bibitem{LSTM}
+S.~Hochreiter and J.~Schmidhuber, ``Long short-term memory,'' {\em Neural
+  computation}, vol.~9, pp.~1735--80, 12 1997.
 
 \bibitem{SSA}
-James~B. Elsner and Anastasios~A. Tsonis.
-\newblock Singular spectrum analysis: A new tool in time series analysis.
-\newblock 1996.
-
-\bibitem{HIGHAM1988103}
-Nicholas~J. Higham.
-\newblock Computing a nearest symmetric positive semidefinite matrix.
-\newblock {\em Linear Algebra and its Applications}, 103:103--118, 1988.
-
-\bibitem{LSTM}
-Sepp Hochreiter and Jürgen Schmidhuber.
-\newblock Long short-term memory.
-\newblock {\em Neural computation}, 9:1735--80, 12 1997.
-
-\bibitem{MulticorrelatedQuadratic}
-Roman Isachenko and Vadim Strijov.
-\newblock Quadratic programming feature selection for multicorrelated signal
-  decoding with partial least squares.
-\newblock {\em Expert Systems with Applications}, 207:117967, 11 2022.
-
-\bibitem{jadon2022comprehensive}
-Aryan Jadon, Avinash Patil, and Shruti Jadon.
-\newblock A comprehensive survey of regression based loss functions for time
-  series forecasting, 2022.
-
-\bibitem{liu2022pyraformer}
-Shizhan Liu, Hang Yu, Cong Liao, Jianguo Li, Weiyao Lin, Alex~X Liu, and
-  Schahram Dustdar.
-\newblock Pyraformer: Low-complexity pyramidal attention for long-range time
-  series modeling and forecasting.
-\newblock In {\em International Conference on Learning Representations}, 2022.
-
-\bibitem{mikhalevich2024methodsnonconvexoptimization}
-V.~S. Mikhalevich, A.~M. Gupal, and V.~I. Norkin.
-\newblock Methods of nonconvex optimization, 2024.
+J.~B. Elsner and A.~A. Tsonis, ``Singular spectrum analysis: A new tool in time
+  series analysis,'' 1996.
 
 \bibitem{Biosignals}
-Anastasia Motrenko and Vadim Strijov.
-\newblock Extracting fundamental periods to segment biomedical signals.
-\newblock {\em IEEE journal of biomedical and health informatics}, 20, 08 2015.
+A.~Motrenko and V.~Strijov, ``Extracting fundamental periods to segment
+  biomedical signals,'' {\em IEEE journal of biomedical and health
+  informatics}, vol.~20, 08 2015.
 
-\bibitem{puchkin2023sharper}
-Nikita Puchkin, Fedor Noskov, and Vladimir Spokoiny.
-\newblock Sharper dimension-free bounds on the frobenius distance between
-  sample covariance and its expectation, 2023.
+\bibitem{boyd2017multiperiod}
+S.~Boyd, E.~Busseti, S.~Diamond, R.~N. Kahn, K.~Koh, P.~Nystrup, and J.~Speth,
+  ``Multi-period trading via convex optimization,'' 2017.
 
-\bibitem{inbook}
-Nickolay Trendafilov and Michele Gallo.
-\newblock {\em Metric multidimensional scaling (MDS) and related methods},
-  pages 325--371.
-\newblock 09 2021.
-
-\bibitem{NIPS2017_3f5ee243}
-Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
-  Aidan~N Gomez, \L~ukasz Kaiser, and Illia Polosukhin.
-\newblock Attention is all you need.
-\newblock In I.~Guyon, U.~Von Luxburg, S.~Bengio, H.~Wallach, R.~Fergus,
-  S.~Vishwanathan, and R.~Garnett, editors, {\em Advances in Neural Information
-  Processing Systems}, volume~30. Curran Associates, Inc., 2017.
-
-\bibitem{wu2021autoformer}
-Haixu Wu, Jiehui Xu, Jianmin Wang, and Mingsheng Long.
-\newblock Autoformer: Decomposition transformers with {Auto-Correlation} for
-  long-term series forecasting.
-\newblock In {\em Advances in Neural Information Processing Systems}, 2021.
-
-\bibitem{zhang2023crossformer}
-Yunhao Zhang and Junchi Yan.
-\newblock Crossformer: Transformer utilizing cross-dimension dependency for
-  multivariate time series forecasting.
-\newblock In {\em The Eleventh International Conference on Learning
-  Representations}, 2023.
-
-\bibitem{haoyietal-informerEx-2023}
-Haoyi Zhou, Jianxin Li, Shanghang Zhang, Shuai Zhang, Mengyi Yan, and Hui
-  Xiong.
-\newblock Expanding the prediction capacity in long sequence time-series
-  forecasting.
-\newblock {\em Artificial Intelligence}, 318:103886, 2023.
+\bibitem{MulticorrelatedQuadratic}
+R.~Isachenko and V.~Strijov, ``Quadratic programming feature selection for
+  multicorrelated signal decoding with partial least squares,'' {\em Expert
+  Systems with Applications}, vol.~207, p.~117967, 11 2022.
 
 \bibitem{haoyietal-informer-2021}
-Haoyi Zhou, Shanghang Zhang, Jieqi Peng, Shuai Zhang, Jianxin Li, Hui Xiong,
-  and Wancai Zhang.
-\newblock Informer: Beyond efficient transformer for long sequence time-series
-  forecasting.
-\newblock In {\em The Thirty-Fifth {AAAI} Conference on Artificial
-  Intelligence, {AAAI} 2021, Virtual Conference}, volume~35, pages
-  11106--11115. {AAAI} Press, 2021.
+H.~Zhou, S.~Zhang, J.~Peng, S.~Zhang, J.~Li, H.~Xiong, and W.~Zhang,
+  ``Informer: Beyond efficient transformer for long sequence time-series
+  forecasting,'' in {\em The Thirty-Fifth {AAAI} Conference on Artificial
+  Intelligence, {AAAI} 2021, Virtual Conference}, vol.~35, pp.~11106--11115,
+  {AAAI} Press, 2021.
+
+\bibitem{haoyietal-informerEx-2023}
+H.~Zhou, J.~Li, S.~Zhang, S.~Zhang, M.~Yan, and H.~Xiong, ``Expanding the
+  prediction capacity in long sequence time-series forecasting,'' {\em
+  Artificial Intelligence}, vol.~318, p.~103886, 2023.
+
+\bibitem{wu2021autoformer}
+H.~Wu, J.~Xu, J.~Wang, and M.~Long, ``Autoformer: Decomposition transformers
+  with {Auto-Correlation} for long-term series forecasting,'' in {\em Advances
+  in Neural Information Processing Systems}, 2021.
+
+\bibitem{liu2022pyraformer}
+S.~Liu, H.~Yu, C.~Liao, J.~Li, W.~Lin, A.~X. Liu, and S.~Dustdar, ``Pyraformer:
+  Low-complexity pyramidal attention for long-range time series modeling and
+  forecasting,'' in {\em International Conference on Learning Representations},
+  2022.
+
+\bibitem{NIPS2017_3f5ee243}
+A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez, L.~u.
+  Kaiser, and I.~Polosukhin, ``Attention is all you need,'' in {\em Advances in
+  Neural Information Processing Systems} (I.~Guyon, U.~V. Luxburg, S.~Bengio,
+  H.~Wallach, R.~Fergus, S.~Vishwanathan, and R.~Garnett, eds.), vol.~30,
+  Curran Associates, Inc., 2017.
+
+\bibitem{zhang2023crossformer}
+Y.~Zhang and J.~Yan, ``Crossformer: Transformer utilizing cross-dimension
+  dependency for multivariate time series forecasting,'' in {\em The Eleventh
+  International Conference on Learning Representations}, 2023.
+
+\bibitem{jadon2022comprehensive}
+A.~Jadon, A.~Patil, and S.~Jadon, ``A comprehensive survey of regression based
+  loss functions for time series forecasting,'' 2022.
+
+\bibitem{MDS}
+M.~Davison and S.~Sireci, ``Multidimensional scaling,'' 10 2012.
+
+\bibitem{inbook}
+N.~Trendafilov and M.~Gallo, {\em Metric multidimensional scaling (MDS) and
+  related methods}, pp.~325--371.
+\newblock 09 2021.
+
+\bibitem{puchkin2023sharper}
+N.~Puchkin, F.~Noskov, and V.~Spokoiny, ``Sharper dimension-free bounds on the
+  frobenius distance between sample covariance and its expectation,'' 2023.
+
+\bibitem{mikhalevich2024methodsnonconvexoptimization}
+V.~S. Mikhalevich, A.~M. Gupal, and V.~I. Norkin, ``Methods of nonconvex
+  optimization,'' 2024.
+
+\bibitem{HIGHAM1988103}
+N.~J. Higham, ``Computing a nearest symmetric positive semidefinite matrix,''
+  {\em Linear Algebra and its Applications}, vol.~103, pp.~103--118, 1988.
 
 \bibitem{zhou2021informer}
-Haoyi Zhou, Shanghang Zhang, Jieqi Peng, Shuai Zhang, Jianxin Li, Hui Xiong,
-  and Wancai Zhang.
-\newblock Informer: Beyond efficient transformer for long sequence time-series
-  forecasting, 2021.
+H.~Zhou, S.~Zhang, J.~Peng, S.~Zhang, J.~Li, H.~Xiong, and W.~Zhang,
+  ``Informer: Beyond efficient transformer for long sequence time-series
+  forecasting,'' 2021.
 
 \end{thebibliography}
