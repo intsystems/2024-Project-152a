@@ -1,89 +1,812 @@
-\begin{thebibliography}{10}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem{LSTM}
-S.~Hochreiter and J.~Schmidhuber, ``Long short-term memory,'' {\em Neural
-  computation}, vol.~9, pp.~1735--80, 12 1997.
+\datalist[entry]{none/global//global/global}
+  \entry{LSTM}{article}{}
+    \name{author}{2}{}{%
+      {{hash=HS}{%
+         family={Hochreiter},
+         familyi={H\bibinitperiod},
+         given={Sepp},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Schmidhuber},
+         familyi={S\bibinitperiod},
+         given={Jürgen},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HSSJ1}
+    \strng{fullhash}{HSSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1162/neco.1997.9.8.1735
+    \endverb
+    \field{pages}{1735\bibrangedash 80}
+    \field{title}{Long Short-term Memory}
+    \field{volume}{9}
+    \field{journaltitle}{Neural computation}
+    \field{month}{12}
+    \field{year}{1997}
+  \endentry
 
-\bibitem{SSA}
-J.~B. Elsner and A.~A. Tsonis, ``Singular spectrum analysis: A new tool in time
-  series analysis,'' 1996.
+  \entry{SSA}{book}{}
+    \name{author}{2}{}{%
+      {{hash=GN}{%
+         family={Golyandina},
+         familyi={G\bibinitperiod},
+         given={Nina},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=ZA}{%
+         family={Zhigljavsky},
+         familyi={Z\bibinitperiod},
+         given={Anatoly},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GNZA1}
+    \strng{fullhash}{GNZA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-642-34913-3
+    \endverb
+    \field{isbn}{978-3-642-34913-3}
+    \field{title}{Singular Spectrum Analysis for Time Series}
+    \field{month}{01}
+    \field{year}{2013}
+  \endentry
 
-\bibitem{Biosignals}
-A.~Motrenko and V.~Strijov, ``Extracting fundamental periods to segment
-  biomedical signals,'' {\em IEEE journal of biomedical and health
-  informatics}, vol.~20, 08 2015.
+  \entry{Biosignals}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MA}{%
+         family={Motrenko},
+         familyi={M\bibinitperiod},
+         given={Anastasia},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SV}{%
+         family={Strijov},
+         familyi={S\bibinitperiod},
+         given={Vadim},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MASV1}
+    \strng{fullhash}{MASV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/JBHI.2015.2466440
+    \endverb
+    \field{title}{Extracting Fundamental Periods to Segment Biomedical Signals}
+    \field{volume}{20}
+    \field{journaltitle}{IEEE journal of biomedical and health informatics}
+    \field{month}{08}
+    \field{year}{2015}
+  \endentry
 
-\bibitem{boyd2017multiperiod}
-S.~Boyd, E.~Busseti, S.~Diamond, R.~N. Kahn, K.~Koh, P.~Nystrup, and J.~Speth,
-  ``Multi-period trading via convex optimization,'' 2017.
+  \entry{boyd2017multiperiod}{misc}{}
+    \name{author}{7}{}{%
+      {{hash=BS}{%
+         family={Boyd},
+         familyi={B\bibinitperiod},
+         given={Stephen},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BE}{%
+         family={Busseti},
+         familyi={B\bibinitperiod},
+         given={Enzo},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=DS}{%
+         family={Diamond},
+         familyi={D\bibinitperiod},
+         given={Steven},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=KRN}{%
+         family={Kahn},
+         familyi={K\bibinitperiod},
+         given={Ronald\bibnamedelima N.},
+         giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Koh},
+         familyi={K\bibinitperiod},
+         given={Kwangmoo},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=NP}{%
+         family={Nystrup},
+         familyi={N\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Speth},
+         familyi={S\bibinitperiod},
+         given={Jan},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BS+1}
+    \strng{fullhash}{BSBEDSKRNKKNPSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1705.00109
+    \endverb
+    \field{title}{Multi-Period Trading via Convex Optimization}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{q-fin.PM}
+    \field{year}{2017}
+  \endentry
 
-\bibitem{MulticorrelatedQuadratic}
-R.~Isachenko and V.~Strijov, ``Quadratic programming feature selection for
-  multicorrelated signal decoding with partial least squares,'' {\em Expert
-  Systems with Applications}, vol.~207, p.~117967, 11 2022.
+  \entry{MulticorrelatedQuadratic}{article}{}
+    \name{author}{2}{}{%
+      {{hash=IR}{%
+         family={Isachenko},
+         familyi={I\bibinitperiod},
+         given={Roman},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=SV}{%
+         family={Strijov},
+         familyi={S\bibinitperiod},
+         given={Vadim},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IRSV1}
+    \strng{fullhash}{IRSV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/j.eswa.2022.117967
+    \endverb
+    \field{pages}{117967}
+    \field{title}{Quadratic programming feature selection for multicorrelated
+  signal decoding with partial least squares}
+    \field{volume}{207}
+    \field{journaltitle}{Expert Systems with Applications}
+    \field{month}{11}
+    \field{year}{2022}
+  \endentry
 
-\bibitem{haoyietal-informer-2021}
-H.~Zhou, S.~Zhang, J.~Peng, S.~Zhang, J.~Li, H.~Xiong, and W.~Zhang,
-  ``Informer: Beyond efficient transformer for long sequence time-series
-  forecasting,'' in {\em The Thirty-Fifth {AAAI} Conference on Artificial
-  Intelligence, {AAAI} 2021, Virtual Conference}, vol.~35, pp.~11106--11115,
-  {AAAI} Press, 2021.
+  \entry{haoyietal-informer-2021}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=ZH}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Haoyi},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shanghang},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=PJ}{%
+         family={Peng},
+         familyi={P\bibinitperiod},
+         given={Jieqi},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shuai},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Jianxin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=XH}{%
+         family={Xiong},
+         familyi={X\bibinitperiod},
+         given={Hui},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZW}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Wancai},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{AAAI} Press}%
+    }
+    \strng{namehash}{ZH+1}
+    \strng{fullhash}{ZHZSPJZSLJXHZW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{The Thirty-Fifth {AAAI} Conference on Artificial
+  Intelligence, {AAAI} 2021, Virtual Conference}
+    \field{number}{12}
+    \field{pages}{11106\bibrangedash 11115}
+    \field{title}{Informer: Beyond Efficient Transformer for Long Sequence
+  Time-Series Forecasting}
+    \field{volume}{35}
+    \field{year}{2021}
+  \endentry
 
-\bibitem{haoyietal-informerEx-2023}
-H.~Zhou, J.~Li, S.~Zhang, S.~Zhang, M.~Yan, and H.~Xiong, ``Expanding the
-  prediction capacity in long sequence time-series forecasting,'' {\em
-  Artificial Intelligence}, vol.~318, p.~103886, 2023.
+  \entry{haoyietal-informerEx-2023}{article}{}
+    \name{author}{6}{}{%
+      {{hash=ZH}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Haoyi},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Jianxin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shanghang},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shuai},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=YM}{%
+         family={Yan},
+         familyi={Y\bibinitperiod},
+         given={Mengyi},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=XH}{%
+         family={Xiong},
+         familyi={X\bibinitperiod},
+         given={Hui},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZH+1}
+    \strng{fullhash}{ZHLJZSZSYMXH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{issn}{0004-3702}
+    \field{pages}{103886}
+    \field{title}{Expanding the prediction capacity in long sequence
+  time-series forecasting}
+    \field{volume}{318}
+    \field{journaltitle}{Artificial Intelligence}
+    \field{year}{2023}
+  \endentry
 
-\bibitem{wu2021autoformer}
-H.~Wu, J.~Xu, J.~Wang, and M.~Long, ``Autoformer: Decomposition transformers
-  with {Auto-Correlation} for long-term series forecasting,'' in {\em Advances
-  in Neural Information Processing Systems}, 2021.
+  \entry{wu2021autoformer}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=WH}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Haixu},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=XJ}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Jiehui},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Jianmin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Long},
+         familyi={L\bibinitperiod},
+         given={Mingsheng},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WH+1}
+    \strng{fullhash}{WHXJWJLM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 2106.13008
+    \endverb
+    \field{title}{Autoformer: Decomposition Transformers with Auto-Correlation
+  for Long-Term Series Forecasting}
+    \verb{url}
+    \verb https://arxiv.org/abs/2106.13008
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{year}{2022}
+  \endentry
 
-\bibitem{liu2022pyraformer}
-S.~Liu, H.~Yu, C.~Liao, J.~Li, W.~Lin, A.~X. Liu, and S.~Dustdar, ``Pyraformer:
-  Low-complexity pyramidal attention for long-range time series modeling and
-  forecasting,'' in {\em International Conference on Learning Representations},
-  2022.
+  \entry{liu2022pyraformer}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=LS}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Shizhan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=YH}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Hang},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Liao},
+         familyi={L\bibinitperiod},
+         given={Cong},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Jianguo},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LW}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Weiyao},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=LAX}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Alex\bibnamedelima X.},
+         giveni={A\bibinitperiod\bibinitdelim X\bibinitperiod},
+      }}%
+      {{hash=DS}{%
+         family={Dustdar},
+         familyi={D\bibinitperiod},
+         given={Schahram},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LS+1}
+    \strng{fullhash}{LSYHLCLJLWLAXDS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations}
+    \field{title}{Pyraformer: Low-Complexity Pyramidal Attention for Long-Range
+  Time Series Modeling and Forecasting}
+    \verb{url}
+    \verb https://openreview.net/forum?id=0EXmFzUn5I
+    \endverb
+    \field{year}{2022}
+  \endentry
 
-\bibitem{NIPS2017_3f5ee243}
-A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez, L.~u.
-  Kaiser, and I.~Polosukhin, ``Attention is all you need,'' in {\em Advances in
-  Neural Information Processing Systems} (I.~Guyon, U.~V. Luxburg, S.~Bengio,
-  H.~Wallach, R.~Fergus, S.~Vishwanathan, and R.~Garnett, eds.), vol.~30,
-  Curran Associates, Inc., 2017.
+  \entry{NIPS2017_3f5ee243}{inproceedings}{}
+    \name{author}{8}{}{%
+      {{hash=VA}{%
+         family={Vaswani},
+         familyi={V\bibinitperiod},
+         given={Ashish},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SN}{%
+         family={Shazeer},
+         familyi={S\bibinitperiod},
+         given={Noam},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=PN}{%
+         family={Parmar},
+         familyi={P\bibinitperiod},
+         given={Niki},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=UJ}{%
+         family={Uszkoreit},
+         familyi={U\bibinitperiod},
+         given={Jakob},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=JL}{%
+         family={Jones},
+         familyi={J\bibinitperiod},
+         given={Llion},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=GAN}{%
+         family={Gomez},
+         familyi={G\bibinitperiod},
+         given={Aidan\bibnamedelima N},
+         giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+      {{hash=KLu}{%
+         family={Kaiser},
+         familyi={K\bibinitperiod},
+         given={\L\bibnamedelima ukasz},
+         giveni={L\bibinitperiod\bibinitdelim u\bibinitperiod},
+      }}%
+      {{hash=PI}{%
+         family={Polosukhin},
+         familyi={P\bibinitperiod},
+         given={Illia},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \name{editor}{7}{}{%
+      {{hash=GI}{%
+         family={Guyon},
+         familyi={G\bibinitperiod},
+         given={I.},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=LUV}{%
+         family={Luxburg},
+         familyi={L\bibinitperiod},
+         given={U.\bibnamedelima Von},
+         giveni={U\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WH}{%
+         family={Wallach},
+         familyi={W\bibinitperiod},
+         given={H.},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=FR}{%
+         family={Fergus},
+         familyi={F\bibinitperiod},
+         given={R.},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=VS}{%
+         family={Vishwanathan},
+         familyi={V\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Garnett},
+         familyi={G\bibinitperiod},
+         given={R.},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Curran Associates, Inc.}%
+    }
+    \strng{namehash}{VA+1}
+    \strng{fullhash}{VASNPNUJJLGANKLuPI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems}
+    \field{title}{Attention is All you Need}
+    \verb{url}
+    \verb https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee24354
+    \verb 7dee91fbd053c1c4a845aa-Paper.pdf
+    \endverb
+    \field{volume}{30}
+    \field{year}{2017}
+  \endentry
 
-\bibitem{zhang2023crossformer}
-Y.~Zhang and J.~Yan, ``Crossformer: Transformer utilizing cross-dimension
-  dependency for multivariate time series forecasting,'' in {\em The Eleventh
-  International Conference on Learning Representations}, 2023.
+  \entry{zhang2023crossformer}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yunhao},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=YJ}{%
+         family={Yan},
+         familyi={Y\bibinitperiod},
+         given={Junchi},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZYYJ1}
+    \strng{fullhash}{ZYYJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{The Eleventh International Conference on Learning
+  Representations}
+    \field{title}{Crossformer: Transformer Utilizing Cross-Dimension Dependency
+  for Multivariate Time Series Forecasting}
+    \verb{url}
+    \verb https://openreview.net/forum?id=vSVLM2j9eie
+    \endverb
+    \field{year}{2023}
+  \endentry
 
-\bibitem{jadon2022comprehensive}
-A.~Jadon, A.~Patil, and S.~Jadon, ``A comprehensive survey of regression based
-  loss functions for time series forecasting,'' 2022.
+  \entry{jadon2022comprehensive}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=JA}{%
+         family={Jadon},
+         familyi={J\bibinitperiod},
+         given={Aryan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Patil},
+         familyi={P\bibinitperiod},
+         given={Avinash},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=JS}{%
+         family={Jadon},
+         familyi={J\bibinitperiod},
+         given={Shruti},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JAPAJS1}
+    \strng{fullhash}{JAPAJS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 2211.02989
+    \endverb
+    \field{title}{A Comprehensive Survey of Regression Based Loss Functions for
+  Time Series Forecasting}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{year}{2022}
+  \endentry
 
-\bibitem{MDS}
-M.~Davison and S.~Sireci, ``Multidimensional scaling,'' 10 2012.
+  \entry{MDS}{article}{}
+    \name{author}{2}{}{%
+      {{hash=DM}{%
+         family={Davison},
+         familyi={D\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sireci},
+         familyi={S\bibinitperiod},
+         given={Stephen},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DMSS1}
+    \strng{fullhash}{DMSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/B978-012691360-6/50013-6
+    \endverb
+    \field{title}{Multidimensional Scaling}
+    \field{month}{10}
+    \field{year}{2012}
+  \endentry
 
-\bibitem{inbook}
-N.~Trendafilov and M.~Gallo, {\em Metric multidimensional scaling (MDS) and
-  related methods}, pp.~325--371.
-\newblock 09 2021.
+  \entry{inbook}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=TN}{%
+         family={Trendafilov},
+         familyi={T\bibinitperiod},
+         given={Nickolay},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=GM}{%
+         family={Gallo},
+         familyi={G\bibinitperiod},
+         given={Michele},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TNGM1}
+    \strng{fullhash}{TNGM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-030-76974-1_10
+    \endverb
+    \field{isbn}{978-3-030-76973-4}
+    \field{pages}{325\bibrangedash 371}
+    \field{title}{Metric multidimensional scaling (MDS) and related methods}
+    \field{month}{09}
+    \field{year}{2021}
+  \endentry
 
-\bibitem{puchkin2023sharper}
-N.~Puchkin, F.~Noskov, and V.~Spokoiny, ``Sharper dimension-free bounds on the
-  frobenius distance between sample covariance and its expectation,'' 2023.
+  \entry{puchkin2023sharper}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=PN}{%
+         family={Puchkin},
+         familyi={P\bibinitperiod},
+         given={Nikita},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=NF}{%
+         family={Noskov},
+         familyi={N\bibinitperiod},
+         given={Fedor},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SV}{%
+         family={Spokoiny},
+         familyi={S\bibinitperiod},
+         given={Vladimir},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PNNFSV1}
+    \strng{fullhash}{PNNFSV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 2308.14739
+    \endverb
+    \field{title}{Sharper dimension-free bounds on the Frobenius distance
+  between sample covariance and its expectation}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{math.PR}
+    \field{year}{2023}
+  \endentry
 
-\bibitem{mikhalevich2024methodsnonconvexoptimization}
-V.~S. Mikhalevich, A.~M. Gupal, and V.~I. Norkin, ``Methods of nonconvex
-  optimization,'' 2024.
+  \entry{mikhalevich2024methodsnonconvexoptimization}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=MVS}{%
+         family={Mikhalevich},
+         familyi={M\bibinitperiod},
+         given={V.\bibnamedelima S.},
+         giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=GAM}{%
+         family={Gupal},
+         familyi={G\bibinitperiod},
+         given={A.\bibnamedelima M.},
+         giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=NVI}{%
+         family={Norkin},
+         familyi={N\bibinitperiod},
+         given={V.\bibnamedelima I.},
+         giveni={V\bibinitperiod\bibinitdelim I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MVSGAMNVI1}
+    \strng{fullhash}{MVSGAMNVI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 2406.10406
+    \endverb
+    \field{title}{Methods of Nonconvex Optimization}
+    \verb{url}
+    \verb https://arxiv.org/abs/2406.10406
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{math.OC}
+    \field{year}{2024}
+  \endentry
 
-\bibitem{HIGHAM1988103}
-N.~J. Higham, ``Computing a nearest symmetric positive semidefinite matrix,''
-  {\em Linear Algebra and its Applications}, vol.~103, pp.~103--118, 1988.
+  \entry{HIGHAM1988103}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HNJ}{%
+         family={Higham},
+         familyi={H\bibinitperiod},
+         given={Nicholas\bibnamedelima J.},
+         giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HNJ1}
+    \strng{fullhash}{HNJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    The nearest symmetric positive semidefinite matrix in the Frobenius norm to
+  an arbitrary real matrix A is shown to be (B + H)/2, where H is the symmetric
+  polar factor of B=(A + AT)/2. In the 2-norm a nearest symmetric positive
+  semidefinite matrix, and its distance δ2(A) from A, are given by a
+  computationally challenging formula due to Halmos. We show how the bisection
+  method can be applied to this formula to compute upper and lower bounds for
+  δ2(A) differing by no more than a given amount. A key ingredient is a stable
+  and efficient test for positive definiteness, based on an attempted Choleski
+  decomposition. For accurate computation of δ2(A) we formulate the problem as
+  one of zero finding and apply a hybrid Newton-bisection algorithm. Some
+  numerical difficulties are discussed and illustrated by example.%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.1016/0024-3795(88)90223-6
+    \endverb
+    \field{issn}{0024-3795}
+    \field{pages}{103\bibrangedash 118}
+    \field{title}{Computing a nearest symmetric positive semidefinite matrix}
+    \field{volume}{103}
+    \field{journaltitle}{Linear Algebra and its Applications}
+    \field{year}{1988}
+  \endentry
 
-\bibitem{zhou2021informer}
-H.~Zhou, S.~Zhang, J.~Peng, S.~Zhang, J.~Li, H.~Xiong, and W.~Zhang,
-  ``Informer: Beyond efficient transformer for long sequence time-series
-  forecasting,'' 2021.
-
-\end{thebibliography}
+  \entry{zhou2021informer}{misc}{}
+    \name{author}{7}{}{%
+      {{hash=ZH}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Haoyi},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shanghang},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=PJ}{%
+         family={Peng},
+         familyi={P\bibinitperiod},
+         given={Jieqi},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Shuai},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Jianxin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=XH}{%
+         family={Xiong},
+         familyi={X\bibinitperiod},
+         given={Hui},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZW}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Wancai},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZH+1}
+    \strng{fullhash}{ZHZSPJZSLJXHZW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 2012.07436
+    \endverb
+    \field{title}{Informer: Beyond Efficient Transformer for Long Sequence
+  Time-Series Forecasting}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{year}{2021}
+  \endentry
+\enddatalist
+\endinput
