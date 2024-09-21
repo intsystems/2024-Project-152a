@@ -153,12 +153,10 @@
     \strng{fullhash}{BSBEDSKRNKKNPSJ1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 1705.00109
+    \verb{doi}
+    \verb 10.1561/2400000023
     \endverb
     \field{title}{Multi-Period Trading via Convex Optimization}
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{q-fin.PM}
     \field{year}{2017}
   \endentry
 
@@ -247,9 +245,12 @@
     \field{labeltitlesource}{title}
     \field{booktitle}{The Thirty-Fifth {AAAI} Conference on Artificial
   Intelligence, {AAAI} 2021, Virtual Conference}
+    \verb{doi}
+    \verb 10.1609/aaai.v35i12.17325
+    \endverb
     \field{number}{12}
     \field{pages}{11106\bibrangedash 11115}
-    \field{title}{Informer: Beyond Efficient Transformer for Long Sequence
+    \field{title}{Informer: ond Efficient Transformer for Long Sequence
   Time-Series Forecasting}
     \field{volume}{35}
     \field{year}{2021}
@@ -338,15 +339,11 @@
     \strng{fullhash}{WHXJWJLM1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 2106.13008
+    \verb{doi}
+    \verb 10.5555/3540261.3541978
     \endverb
     \field{title}{Autoformer: Decomposition Transformers with Auto-Correlation
   for Long-Term Series Forecasting}
-    \verb{url}
-    \verb https://arxiv.org/abs/2106.13008
-    \endverb
-    \field{eprinttype}{arXiv}
     \field{eprintclass}{cs.LG}
     \field{year}{2022}
   \endentry
@@ -401,15 +398,15 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{booktitle}{International Conference on Learning Representations}
+    \verb{doi}
+    \verb 10.34726/2945
+    \endverb
     \field{title}{Pyraformer: Low-Complexity Pyramidal Attention for Long-Range
   Time Series Modeling and Forecasting}
-    \verb{url}
-    \verb https://openreview.net/forum?id=0EXmFzUn5I
-    \endverb
     \field{year}{2022}
   \endentry
 
-  \entry{NIPS2017_3f5ee243}{inproceedings}{}
+  \entry{NIPS2017_3f5ee243}{article}{}
     \name{author}{8}{}{%
       {{hash=VA}{%
          family={Vaswani},
@@ -441,17 +438,17 @@
          given={Llion},
          giveni={L\bibinitperiod},
       }}%
-      {{hash=GAN}{%
+      {{hash=GA}{%
          family={Gomez},
          familyi={G\bibinitperiod},
-         given={Aidan\bibnamedelima N},
-         giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod},
+         given={Aidan},
+         giveni={A\bibinitperiod},
       }}%
-      {{hash=KLu}{%
+      {{hash=KL}{%
          family={Kaiser},
          familyi={K\bibinitperiod},
-         given={\L\bibnamedelima ukasz},
-         giveni={L\bibinitperiod\bibinitdelim u\bibinitperiod},
+         given={Lukasz},
+         giveni={L\bibinitperiod},
       }}%
       {{hash=PI}{%
          family={Polosukhin},
@@ -460,64 +457,15 @@
          giveni={I\bibinitperiod},
       }}%
     }
-    \name{editor}{7}{}{%
-      {{hash=GI}{%
-         family={Guyon},
-         familyi={G\bibinitperiod},
-         given={I.},
-         giveni={I\bibinitperiod},
-      }}%
-      {{hash=LUV}{%
-         family={Luxburg},
-         familyi={L\bibinitperiod},
-         given={U.\bibnamedelima Von},
-         giveni={U\bibinitperiod\bibinitdelim V\bibinitperiod},
-      }}%
-      {{hash=BS}{%
-         family={Bengio},
-         familyi={B\bibinitperiod},
-         given={S.},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=WH}{%
-         family={Wallach},
-         familyi={W\bibinitperiod},
-         given={H.},
-         giveni={H\bibinitperiod},
-      }}%
-      {{hash=FR}{%
-         family={Fergus},
-         familyi={F\bibinitperiod},
-         given={R.},
-         giveni={R\bibinitperiod},
-      }}%
-      {{hash=VS}{%
-         family={Vishwanathan},
-         familyi={V\bibinitperiod},
-         given={S.},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=GR}{%
-         family={Garnett},
-         familyi={G\bibinitperiod},
-         given={R.},
-         giveni={R\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Curran Associates, Inc.}%
-    }
     \strng{namehash}{VA+1}
-    \strng{fullhash}{VASNPNUJJLGANKLuPI1}
+    \strng{fullhash}{VASNPNUJJLGAKLPI1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{booktitle}{Advances in Neural Information Processing Systems}
-    \field{title}{Attention is All you Need}
-    \verb{url}
-    \verb https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee24354
-    \verb 7dee91fbd053c1c4a845aa-Paper.pdf
+    \verb{doi}
+    \verb 10.48550/arXiv.1706.03762
     \endverb
-    \field{volume}{30}
+    \field{title}{Attention Is All You Need}
+    \field{month}{06}
     \field{year}{2017}
   \endentry
 
@@ -575,13 +523,11 @@
     \strng{fullhash}{JAPAJS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 2211.02989
+    \verb{doi}
+    \verb 10.1007/978-981-97-3245-6_9
     \endverb
     \field{title}{A Comprehensive Survey of Regression Based Loss Functions for
   Time Series Forecasting}
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.LG}
     \field{year}{2022}
   \endentry
 
@@ -666,13 +612,11 @@
     \strng{fullhash}{PNNFSV1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 2308.14739
+    \verb{doi}
+    \verb 10.48550/arXiv.2308.14739
     \endverb
     \field{title}{Sharper dimension-free bounds on the Frobenius distance
   between sample covariance and its expectation}
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{math.PR}
     \field{year}{2023}
   \endentry
 
@@ -701,14 +645,10 @@
     \strng{fullhash}{MVSGAMNVI1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 2406.10406
+    \verb{doi}
+    \verb 10.48550/arXiv.2406.10406
     \endverb
     \field{title}{Methods of Nonconvex Optimization}
-    \verb{url}
-    \verb https://arxiv.org/abs/2406.10406
-    \endverb
-    \field{eprinttype}{arXiv}
     \field{eprintclass}{math.OC}
     \field{year}{2024}
   \endentry
@@ -748,65 +688,6 @@
     \field{volume}{103}
     \field{journaltitle}{Linear Algebra and its Applications}
     \field{year}{1988}
-  \endentry
-
-  \entry{zhou2021informer}{misc}{}
-    \name{author}{7}{}{%
-      {{hash=ZH}{%
-         family={Zhou},
-         familyi={Z\bibinitperiod},
-         given={Haoyi},
-         giveni={H\bibinitperiod},
-      }}%
-      {{hash=ZS}{%
-         family={Zhang},
-         familyi={Z\bibinitperiod},
-         given={Shanghang},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=PJ}{%
-         family={Peng},
-         familyi={P\bibinitperiod},
-         given={Jieqi},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=ZS}{%
-         family={Zhang},
-         familyi={Z\bibinitperiod},
-         given={Shuai},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=LJ}{%
-         family={Li},
-         familyi={L\bibinitperiod},
-         given={Jianxin},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=XH}{%
-         family={Xiong},
-         familyi={X\bibinitperiod},
-         given={Hui},
-         giveni={H\bibinitperiod},
-      }}%
-      {{hash=ZW}{%
-         family={Zhang},
-         familyi={Z\bibinitperiod},
-         given={Wancai},
-         giveni={W\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{ZH+1}
-    \strng{fullhash}{ZHZSPJZSLJXHZW1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{eprint}
-    \verb 2012.07436
-    \endverb
-    \field{title}{Informer: Beyond Efficient Transformer for Long Sequence
-  Time-Series Forecasting}
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.LG}
-    \field{year}{2021}
   \endentry
 \enddatalist
 \endinput

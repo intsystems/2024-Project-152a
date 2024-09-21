@@ -7,7 +7,6 @@
 \usepackage[citestyle=numeric,style=numeric,backend=bibtex,sorting=none]{biblatex}
 \renewcommand{\baselinestretch}{1.36}
 
-\usepackage{diagbox}  % TODO remove 
 \usepackage{doi}
 \usepackage{makecell}
 \usepackage{subfig}
@@ -305,7 +304,7 @@ The asymptotic complexity of this reconstruction will be $O(2^K \times K \times 
 
 \section{Experiment}
 
-In this section we test the algorithm when the pairwise correlation matrix prediction from the previous section is inaccurate. Experiments are performed on synthetic data as well as on Electricity Transformer Temperature \cite{zhou2021informer} data. Different values of $K$ are tested, as well as different added noise to the true matrix values.
+In this section we test the algorithm when the pairwise correlation matrix prediction from the previous section is inaccurate. Experiments are performed on synthetic data as well as on Electricity Transformer Temperature \cite{haoyietal-informer-2021} data. Different values of $K$ are tested, as well as different added noise to the true matrix values.
 
 \paragraph{Synthetic data.} The table below shows the error values after reconstruction the time series values under different conditions. Generated data consisting of a combination of noisy sines and cosines is used.
 
@@ -314,7 +313,7 @@ In this section we test the algorithm when the pairwise correlation matrix predi
 \begin{center}
 \caption{Loss on synthetic data}
 \begin{tabular}{|l||l||*{3}{c|}}\hline
-	\backslashbox{Noise}{Parameters}
+	{Noise}
 	&\makebox[3em]{Metric}&\makebox[3em]{$K=2$}&\makebox[3em]{$K=4$}&\makebox[3em]{$K=10$}\\\hline
 	$\mathcal{N}(0, 0.01)$&\makecell{ MAE: \\ MSE: } &\makecell{ 0.070 \\ 0.010 }&\makecell{ 0.052 \\ 0.005 }&\makecell{ 0.040 \\ 0.002 }\\\hline
 	$\mathcal{N}(0, 0.05)$&\makecell{ MAE: \\ MSE: } &\makecell{ 0.316 \\ 0.295 }&\makecell{ 0.176 \\ 0.060 }&\makecell{ 0.116 \\ 0.025 }\\\hline
@@ -347,7 +346,7 @@ The following is a similar table for the Electricity Transformer Temperature dat
 \begin{center}
 \caption{Loss on ETTh1 data}
 \begin{tabular}{|l||l||*{3}{c|}}\hline
-	\backslashbox{Noise}{Parameters}
+	{Noise}
 	&\makebox[3em]{Metric}&\makebox[3em]{$K=2$}&\makebox[3em]{$K=4$}&\makebox[3em]{$K=10$}\\\hline
 	$\mathcal{N}(0, 0.01)$&\makecell{ MAE: \\ MSE: } &\makecell{ 0.071 \\ 0.030 }&\makecell{ 0.047 \\ 0.004 }&\makecell{ 0.038 \\ 0.003 }\\\hline
 	$\mathcal{N}(0, 0.05)$&\makecell{ MAE: \\ MSE: } &\makecell{ 0.240 \\ 0.198 }&\makecell{ 0.153 \\ 0.053 }&\makecell{ 0.096 \\ 0.019 }\\\hline
