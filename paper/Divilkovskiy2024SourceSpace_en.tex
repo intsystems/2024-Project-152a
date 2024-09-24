@@ -13,7 +13,7 @@
 \addbibresource{references.bib}
 
 
-\title{Calculating the value of a multivariate time series at a point by the predicted matrix of pairwise correlation}
+\title{Correlation-based Algorithm for pointwise predicting the value of a multivariate time series}
 
 \author{%
 	Maxim Divilkovskiy\footnote{Forecsys, mdivilkovskij@gmail.com},  %
@@ -28,7 +28,7 @@
 \maketitle
 
 \begin{abstract}
-The paper investigates a time series prediction problem. It constructs a pointwise prediction model for a set of time series. These time series have high variance and high covariance. To solve this problem it introduces space of pairwise distances between time series and analyses its properties. In this space, the pairwise distance matrix is predicted in its dynamics. The time series values are reconstructed at the next time moment with this matrix. The paper proposes several methods for the prediction of time series space using the reconstruction reconstructed space of the pairwise distance matrices. It shows the existence of multiple time series values satisfying the same pairwise distance matrix. It presents two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. The paper derives an explicit view of the reconstructed values through the pairwise correlation matrix. Also, it derives an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space but in the space of pairwise distances.
+The paper investigates a time series prediction problem. It constructs a pointwise prediction model for a set of time series. These time series have high variance and high covariance. Paper introduces space of pairwise distances between time series and analyses its properties. In this space, the pairwise distance matrix is predicted in its dynamics. The time series values are reconstructed at the next time moment with this matrix. The authors propose several methods for the pointwise prediction of time series space using the reconstruction reconstructed space of the pairwise distance matrices. We prove the existence of multiple time series values satisfying the same pairwise distance matrix. It presents two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. The paper derives an explicit view of the reconstructed values through the pairwise correlation matrix. Also, it derives an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space but in the space of pairwise distances.
 
 
 \end{abstract}
@@ -36,22 +36,24 @@ The paper investigates a time series prediction problem. It constructs a pointwi
 \textbf{Keywords:} Metric Non-Convex Optimization, Time Series Forecasting, Singular Value Decomposition, Pearson Correlation Coefficient
 
 \section{Introduction}
- 	In this research we present a new method for pointwise time series prediction. Considered time series are characterized by high pairwise covariance and high variance. The task of pointwise prediction is to calculate the values of the time series at the next point in time using the available historical data for the previous several points in time. The task is divided into three stages: first, the initial space of the time series is transformed into a metric space by constructing a matrix of pairwise distances. Then the prediction of the matrix of pairwise distances at the next moment of time is done in the metric space. In the theoretical part of the paper, we show the necessity of predicting at least two matrices. We also show that the uniqueness of the answer requires the use of several matrices corresponding to different time intervals. In the last step, the predicted matrices are used to reconstruct the result into the original space. We focus mostly on the last step. Experiments are presented for the case of accurate matrix prediction with the addition of normal noise to the values.
+ 	In this research the authors present a new method for pointwise time series prediction. Time series have high pairwise covariance and high variance. Pointwise prediction consists of calculating the values of the time series at the next point in time using the available historical data for the previous several points in time. A set of $d$ time series, each of which consists of $t$ time moments forms a multivariate time series. We call the multivariate time series space isomorphic to $\mathbb{R}^{d \times t}$ the source time series space. The prediction problem divides into three stages. First, transform the source space of the time series into a metric space by constructing a matrix of pairwise distances. Second, do the prediction of the pairwise distances matrix at the next moment of time in the metric space. Third, use the predicted matrix to reconstruct the result into the source space. In the theoretical part of the paper, we prove the necessity of predicting at least two matrices. We show that the uniqueness of the reconstructed result in the source space requires the use of several matrices corresponding to different time intervals. We focus mostly on the last step. We present experiments for the case of accurate matrix prediction and for the matrix prediction with the addition of normal noise to the values.
 
-	Existing time series prediction methods such as LSTM \cite{LSTM}, SSA \cite{SSA} and other \cite{Biosignals, boyd2017multiperiod} are based on predicting the value of a single series. These methods can be modified to predict also a set of time series. For this purpose, it is sufficient to consider a set of series as one multivariate series. However, this approach does not explicitly model the dependencies between different series. In this paper, we propose to analyze the change in \emph{set} of time series. This approach explicitly uses the relationships between them as information. A similar study is carried out in the \cite{MulticorrelatedQuadratic} paper, but it emphasizes on the feature selection task. This task consists in selecting such a subset of the original time series for which it is possible to make a predict of sufficient quality.
+	Existing time series prediction methods such as LSTM \cite{LSTM}, SSA \cite{SSA} and other \cite{Biosignals, boyd2017multiperiod} predict the value of a univariate series. These methods can be modified to predict also a set of time series. For this purpose, it is sufficient to present a set of series as one multivariate series. This approach does not explicitly model the dependencies between different series. In contrast, we propose to analyze the change in \emph{set} of time series. Our approach explicitly uses the relationships between them as information. A similar study is carried out in the \cite{MulticorrelatedQuadratic} paper, but it emphasizes on the feature selection problem. It consists in selecting such a subset of the original time series for which it is possible to make a predict of sufficient quality.
 	
-	Several recent studies \cite{haoyietal-informer-2021,haoyietal-informerEx-2023,wu2021autoformer,liu2022pyraformer} are based on usage of popular transformer-based models. They were originally proposed for natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems deal with text as a sequence in time. The same approaches may be used for time series predicting. Crossformer \cite{zhang2023crossformer} model uses cross-dimensional dependency.  However, it does not explicitly model the distance function between time series.
+	Recent studies \cite{haoyietal-informer-2021,haoyietal-informerEx-2023,wu2021autoformer,liu2022pyraformer} use popular transformer-based models. Transformer models were originally proposed for natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems deal with text as a sequence in time, the same approaches may be used for time series predicting. The Crossformer model \cite{zhang2023crossformer} uses cross-dimensional dependency.  However, it does not explicitly model the distance function between time series.
 	
-	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. The insufficiency of one matrix to reconstruct the answer is proved. Two methods using several matrices are proposed for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
+	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
+	
+	In the experiments section we measure losses of our Algorithm on synthetic dataset and Electricity Transformer Temperature dataset. We show that as the count of matrices used increases, the loss decreases.
 
 \section{Point-wise prediction of a set of time series}
 
-A set of $d$ time series is given by $t$ vectors:
+The time series with $t$ moments in time is a set of $t$ elements:
 \[
-[\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_t], \text{for each } k: \mathbf{x}_k \in \mathbb{R}^d,
+[\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_t],\qquad \text{for each } k: \mathbf{x}_k \in \mathbb{R}^d,
 \]
 where $\mathbf{x}_{t_i, k} \in \mathbb{R}$ is the value of the series with index $k$ at the time moment $t_i$.
-One has to predict $\mathbf{x}_{t+1}$ the set of all time series at the time moment $t+1$. The matrix $\mathbf{x}$ of size $t \times d$ is treated as a \emph{multidimensional} time series, treating the value at a point as an element of space $\mathbb{R}^d$.
+One has to predict $\mathbf{x}_{t+1}$, which is the value of time series at the time moment $t+1$. The matrix $\mathbf{x}$ of size $t \times d$ is treated as a \emph{multivariate} time series, treating the value at a point as an element of space $\mathbb{R}^d$.
 
 Prediction errors are calculated with two functions,
 \[
@@ -60,41 +62,41 @@ Prediction errors are calculated with two functions,
 \text{MSE} = \frac{1}{d}{\sum_{i=1}^{d} (\mathbf{x}_{t+1} - \mathbf{\hat{x}}_{t+1})^2}.
 \]
 
-\section{Reconstruction by a predicted distance matrix}
+\section{Reconstruction of time series by a predicted distance matrix}
 
-In this section we formulate general algorithm of reconstruction the time series values in the moment $t+1$ from information about time moments $1, 2, \ldots, t$. Novelty of out algorithm consists in usage of \emph{pairwise distance matrices}
+In this section we formulate general algorithm of reconstruction the time series values in the moment $t+1$ from information about time moments $1, 2, \ldots, t$. Novelty of out algorithm consists in usage of \emph{pairwise distance matrices}.
 
-1. Distance matrices between a set of time series values are constructed according to the scheme below.
+Construct distance matrices between a set of time series values according to the scheme below:
 \begin{align*}
-	[\mathbf{x}_1, \ldots, \mathbf{x}_s] &\rightarrow \mathbf{\Sigma}_s, \\
-	[\mathbf{x}_2, \ldots, \mathbf{x}_{s+1}] &\rightarrow \mathbf{\Sigma}_{s+1}, \\
+	[&\mathbf{x}_1, \ldots, \mathbf{x}_s] \rightarrow \mathbf{\Sigma}_s, \\
+	[&\mathbf{x}_2, \ldots, \mathbf{x}_{s+1}] \rightarrow \mathbf{\Sigma}_{s+1}, \\
 	&\vdots \\
-	[\mathbf{x}_{t-s}, \ldots, \mathbf{x}_t] &\rightarrow \mathbf{\Sigma}_{t}.
+	[&\mathbf{x}_{t-s}, \ldots, \mathbf{x}_t] \rightarrow \mathbf{\Sigma}_{t}.
 \end{align*}
+Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between rows $i$ and $j$. We describe the construction formula as well as the choice of the distance function in the following sections.
 
-Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between rows $i$ and $j$. The construction formula as well as the choice of the distance function are described in the following sections.
+Predict the matrix $\hat{\mathbf{\Sigma}}_{t+1}$ from matrices $\mathbf{\Sigma}_s, \mathbf{\Sigma}_{s+1} \ldots, \mathbf{\Sigma}_{t}$.
 
-2. The matrix $\hat{\mathbf{\Sigma}}_{t+1}$ is predicted from these matrices.
-
-3. Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \] is minimal, where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
+Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \rightarrow \min_{\mathbf{\hat{x}}_{t+1}}, \tag{\textasteriskcentered} \label{minimization}\] where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
 
 \section{Existence of several values of a series satisfying same distance matrix}
 
-The existence of several solutions to the minimization problem described above is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to reconstruct several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
+The existence of several solutions to the minimization problem $\eqref{minimization}$ is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to reconstruct several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
 
-Consider the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
+We now describe the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to source time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
 
-Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, which satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vector with value.
+Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vector with value.
 
-One of the fundamentally metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. On this example, we will show that there can be several suitable answers with the same values of distance matrix. Moreover, in the case of the Euclidean metric, the number of answers is infinite, which is shown below:
+One of the fundamental metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. With this example, we show that there can be several reconstructions with the same distance matrices. In the case of the Euclidean metric, the number of answers is infinite, which we show below:
 \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2}.\]
 
 Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
-\[
-\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2} = \sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + [(\hat{\mathbf{x}}_{t+1, i} + C) -(\hat{\mathbf{x}}_{t+1, j} + C)]^2}.
-\]
+\begin{gather*}
+	\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2} =\\
+	= \sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + [(\hat{\mathbf{x}}_{t+1, i} + C) -(\hat{\mathbf{x}}_{t+1, j} + C)]^2}.
+\end{gather*}
 
-In the case of the time series prediction problem, this property is critical because even if the matrix $\mathbf{\Sigma}$ is predicted accurately, there are infinitely many time series values at time $t+1$ corresponding to this matrix. See \ref{fig:fig1} for the example of this effect.
+In the case of the time series prediction problem, this property is critical because even if the matrix $\mathbf{\Sigma}$ is predicted accurately, there are infinitely many time series values at time $t+1$ corresponding to this matrix. See Figure \ref{fig:fig1} for the example of this effect.
 \begin{figure}[!htbp]
 	\centering
 	\subfloat[Reference functions]{\includegraphics[width=0.5\textwidth]{Original_functions.eps}}
