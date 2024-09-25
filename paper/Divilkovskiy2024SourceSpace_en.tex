@@ -44,6 +44,8 @@ The paper investigates a time series prediction problem. It constructs a pointwi
 	
 	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
 	
+	We show that Multidimentional Scaling Algorithm \cite{MDS} and Metric Multidimentional Scaling Algorithm \cite{inbook} cannot uniquely reconstruct the correlation matrix to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances.
+	
 	In the experiments section we measure losses of our Algorithm on synthetic dataset and Electricity Transformer Temperature dataset. We show that as the count of matrices used increases, the loss decreases.
 
 \section{Point-wise prediction of a set of time series}
@@ -111,11 +113,11 @@ In the theorem below we show that usage of only one matrix is insufficient for t
 
 \textbf{Theorem 1.} \emph{For any metric $\rho$ defined in the time series space $\mathbb{R}^t$ there is more than one way to reconstruct the original time series from the pairwise distance matrix constructed by the given metric.}	
 
-\textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. The usage of information about the previous moments of time is considered after this section.
+\textbf{Note 1}. This statement does not use information about the first $t-1$ values of the series. In fact, the series in this case can be thought of as a point in $\mathbb{R}^t$ space. We return to the information about the previous moments of time after this section.
 
 \textbf{Proof}. We only have to show that the metric is not a bijection. This will mean that there are several different pairs of series whose distance between them is the same.
 
-Let us show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, we obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
+Show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
 
 Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such a mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction.
 $\blacksquare$
@@ -126,7 +128,7 @@ Thus, knowing only the distance matrix it is impossible to unambiguously reconst
 
 Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$ using the value of the time series before the time moment $t$: $\mathbf{X}=[\mathbf{x_1}, \ldots, \mathbf{x_{t}}]$. The problem is reformulated as follows:
 
-There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. We also know the distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. It is required to calculate the ($t+1$)'th coordinate of each of the objects. In time series terms, the ($t+1$)'th coordinate is the value of each of the series at that moment in time.
+There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. The distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. One has to calculate the ($t+1$)-th coordinate of each of the objects. In time series terms, the ($t+1$)-th coordinate is the value of each of the series at that moment in time.
 
 \section{Pairwise correlation between time series}
 
@@ -138,7 +140,7 @@ The pairwise distance matrix is constructed as follows:
 	\boldsymbol{\mu}_T = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t.
 \end{gather*}
 
-\textbf{Theorem 2.} \emph{In the case of accurately predicted distance matrix, the function} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \emph{will have two minimums, defined explicitly as follows:}
+\textbf{Theorem 2.} \emph{In the case of accurately predicted distance matrix, the function} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \emph{has two minimums, defined explicitly as follows:}
 
 \begin{align*}
 	\hat{\mathbf{y}}_i &= \mathbf{y}_i,\\
