@@ -214,7 +214,7 @@ The problem with this method is the computational cost of non-convex optimisatio
 
 {\textbf{Theorem 3. (Efficient method for obtaining a pair of possible answers.)} \emph{ The minimum of the function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ is reached on \[\pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t,\] where $\lambda_1$ is the first singular value, $\mathbf{u}_1$ is the first left singular vector of matrix $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$}
 
-\textbf{Proof.} The notation $\mathbf{x}_i$ is used below to denote the \emph{multidimensional} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ through $\mathbf{\Sigma}_t$. After that, the operator norm and rank property of the matrix is used. All expressions below are true for arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition above.
+\textbf{Proof.} The notation $\mathbf{x}_i$ is used below to denote the \emph{multivariate} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ through $\mathbf{\Sigma}_t$. After that, the operator norm and rank property of the matrix is used. All expressions below are true for arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition above.
 \begin{enumerate}
 	\item Express $\boldsymbol{\mu}$ through the values of the time series: \[\boldsymbol{\mu}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \Rightarrow \sum_{i=1}^{t} \mathbf{x}_i = t \boldsymbol{\mu}_t.\]
 	\item Similarly, express $\mathbf{\Sigma_t}$ through the values of the series:
