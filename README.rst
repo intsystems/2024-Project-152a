@@ -15,17 +15,16 @@
 
 .. class:: center
 
-    :Название исследуемой задачи: Восстановление значения многомерного временного ряда в точке по спрогнозированной матрице попарных корреляций
+    :Название исследуемой задачи: Correlation-based Algorithm for pointwise predicting the value of a multivariate time series
     :Тип научной работы: M1P/НИР/CoIS
     :Автор: Maxim Divilkovskiy
     :Научный руководитель: Vadim Strijov
-    :Научный консультант(при наличии): Konstantin Yakovlev
+    :Научный консультант: Konstantin Yakovlev
 
 Abstract
 ========
 
-Решается задача поточечного прогнозирования набора временных рядов с высокой ковариацией и высокой дисперсией. Для решения данной задачи предлагается построить пространство парных расстояний. В этом пространстве прогнозируется матрица попарных расстояний, а затем по известной матрице восстанавливаются значения временных рядов.
-В данной статье изучается способ восстановления прогноза в пространстве временных рядов по известной матрице попарных расстояний. Показывается существование нескольких значений временного ряда, удовлетворяющих одной матрице попарных расстояний. Предлагается несколько алгоритмов, основанных на использовании матриц, построенных по различным временным интервалам с использованием попарной корреляции. Так же, в статье выводится явный вид восстановленных значений через матрицу попарных корреляций. Помимо этого, приводится оценка качества восстановления при добавлении шума в матрицы попарных расстояний. Новизна метода заключается в том, что прогнозирование делается не в исходном пространстве, а в пространстве попарных расстояний.
+The paper investigates a time series prediction problem. It constructs a pointwise prediction model for a set of time series. These time series have high variance and high covariance. Paper introduces space of pairwise distances between time series and analyses its properties. In this space, the pairwise distance matrix is predicted in its dynamics. The time series values are reconstructed at the next time moment with this matrix. The authors propose several methods for the pointwise prediction of time series space using the reconstruction reconstructed space of the pairwise distance matrices. We prove the existence of multiple time series values satisfying the same pairwise distance matrix. It presents two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. The paper derives an explicit view of the reconstructed values through the pairwise correlation matrix. Also, it derives an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space but in the space of pairwise distances.
 
 Research publications
 ===============================
