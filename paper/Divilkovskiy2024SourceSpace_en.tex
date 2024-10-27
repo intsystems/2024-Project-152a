@@ -13,7 +13,7 @@
 \addbibresource{references.bib}
 
 
-\title{Correlation-based Algorithm for pointwise predicting the value of a multivariate time series}
+\title{Correlation-based Algorithm for multivariate time series prediction}
 
 \author{%
 	Maxim Divilkovskiy\footnote{Forecsys, mdivilkovskij@gmail.com},  %
@@ -57,7 +57,7 @@ The time series with $t$ moments in time is a set of $t$ elements:
 where $\mathbf{x}_{t_i, k} \in \mathbb{R}$ is the value of the series with index $k$ at the time moment $t_i$.
 One has to predict $\mathbf{x}_{t+1}$, which is the value of time series at the time moment $t+1$. The matrix $\mathbf{x}$ of size $t \times d$ is treated as a \emph{multivariate} time series, treating the value at a point as an element of space $\mathbb{R}^d$.
 
-Prediction errors are calculated with two functions,
+The prediction errors are calculated with two functions,
 \[
 \text{MAE} = \frac{1}{d}{\sum_{i=1}^{d} |\mathbf{x}_{t+1} - \mathbf{\hat{x}}_{t+1}|}, 
 \qquad \text{and} \qquad 
@@ -79,19 +79,20 @@ Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$.
 
 Predict the matrix $\hat{\mathbf{\Sigma}}_{t+1}$ from matrices $\mathbf{\Sigma}_s, \mathbf{\Sigma}_{s+1} \ldots, \mathbf{\Sigma}_{t}$.
 
-Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \rightarrow \min_{\mathbf{\hat{x}}_{t+1}}, \tag{\textasteriskcentered} \label{minimization}\] where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
+Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \rightarrow \min_{\mathbf{\hat{x}}_{t+1}}, \tag{1} \label{minimization}\] where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
 
 \section{Existence of several values of a series satisfying same distance matrix}
 
 The existence of several solutions to the minimization problem $\eqref{minimization}$ is the central problem we consider in this paper. In this section we show that using one matrix constructed by an arbitrary metric it is possible to reconstruct several different values of the series at the next moment of time. A solution to this problem in the case of using pairwise correlation as a function of distance between certain time series is proposed in the next section.
 
-We now describe the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to source time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x_1}, \ldots, \mathbf{x_{t+1}}]$.
+We now describe the reconstruction of the prediction from the matrix $\mathbf{\Sigma}_{t+1}$ to source time series space, where $\mathbf{\Sigma}_{t+1}$ is the matrix of pairwise distances corresponding to the multivariate series $\mathbf{x}=[\mathbf{x}_1, \ldots, \mathbf{x}_{t+1}]$.
 
-Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, satisfies the properties of the metric. Which are \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j}),\] where $\circ$ denotes the concatenation of vector with value.
+Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for multivariate time series $\mathbf{x} \in \mathbb{R}^{d \times (t+1)}$. $\hat{\mathbf{x}}_{t+1} \in \mathbb{R}^d$ is predicted. Also, the metric \[ \rho : \mathbb{R}^{t+1} \times \mathbb{R}^{t+1} \rightarrow \mathbb{R}, \] defined on time series, satisfies the properties of the metric.
+\[\mathbf{\Sigma}_{i,j} = \rho((\mathbf{x}_{1 \ldots t, i}, \hat{\mathbf{x}}_{t+1, i}), (\mathbf{x}_{1 \ldots t, j}, \hat{\mathbf{x}}_{t+1, j})).\]
 
-One of the fundamental metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. With this example, we show that there can be several reconstructions with the same distance matrices. In the case of the Euclidean metric, the number of answers is infinite, which we show below:
-\[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2}.\]
-
+One of the fundamental metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. With this example, we show that there can be several reconstructions with the same distance matrices. In the case of the Euclidean metric:
+\[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2},\]
+the number of answers is infinite, which we show below.
 Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
 \begin{gather*}
 	\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2} =\\
@@ -107,7 +108,7 @@ In the case of the time series prediction problem, this property is critical bec
 	\label{fig:fig1}
 \end{figure}
 
-However, even using other metrics does not get rid of the problem. This results in the inability to use the classical Multidimentional Scaling \cite{MDS} algorithm to reconstruct the result to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances. Metric MDS Algorithm  \cite{inbook} may be used if distances are not euclidean.
+However, even using other metrics does not get rid of the problem. This results in the inability to use Multidimentional Scaling algorithm to reconstruct the result to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances. Metric MDS Algorithm may be used if distances are not euclidean.
 
 In the theorem below we show that usage of only one matrix is insufficient for the problem of reconstructing values of time series.
 
@@ -119,16 +120,14 @@ In the theorem below we show that usage of only one matrix is insufficient for t
 
 Show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
 
-Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such a mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction.
+Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction.
 $\blacksquare$
 
 \textbf{Note 2}. Essentially, the proof uses only the continuity of the function. This means that even non-metric continuous functions will give the multiplicity of the answer. For example, pairwise correlation of series is also a continuous function.
 
 Thus, knowing only the distance matrix it is impossible to unambiguously reconstruct the original series.
 
-Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$ using the value of the time series before the time moment $t$: $\mathbf{X}=[\mathbf{x_1}, \ldots, \mathbf{x_{t}}]$. The problem is reformulated as follows:
-
-There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. The distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. One has to calculate the ($t+1$)-th coordinate of each of the objects. In time series terms, the ($t+1$)-th coordinate is the value of each of the series at that moment in time.
+Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$ using the value of the time series before the time moment $t$: $\mathbf{X}=[\mathbf{x}_1, \ldots, \mathbf{x}_{t}]$. The problem is reformulated as follows. There are $n$ objects in $\mathbb{R}^{t+1}$, their first $t$ coordinates are known. The distance matrix $\mathbf{\Sigma}_{t+1} \in \mathbb{R}^{(t+1) \times (t+1)}$. One has to calculate the ($t+1$)-th coordinate of each of the objects. In time series terms, the ($t+1$)-th coordinate is the value of each of the series at that moment in time.
 
 \section{Pairwise correlation between time series}
 
@@ -144,47 +143,47 @@ The pairwise distance matrix is constructed as follows:
 
 \begin{align*}
 	\hat{\mathbf{y}}_i &= \mathbf{y}_i,\\
-	\hat{\mathbf{y}}_i &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i,
+	\hat{\mathbf{y}}_i &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i,
 \end{align*}
-\emph{where} $\hat{\mathbf{y}}_i$ $i$\emph{-th coordinate of the predicted value of the series at the moment $T+1$, $\mathbf{A}=(\mathbf{a}_{ik})$ is given multivariate time series,} $y_i$ \emph{are true values of the series at the moment} $T+1$.
+\emph{where} $\hat{\mathbf{y}}_i$ \emph{is} $i$\emph{-th coordinate of the predicted value of the series at the moment $T+1$, $\mathbf{X}=(\mathbf{x}_{ki})$ is given multivariate time series,} $y_i$ \emph{are true values of the series at the moment} $T+1$.
 
-\textbf{Proof.} Let us denote by $\mathbf{\Sigma}$ the true matrix at the moment of time $T$, and $\hat{\mathbf{\Sigma}}$ the predicted one. By construction, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (\mathbf{a}^T_k - \boldsymbol{\mu}_T)(\mathbf{a}^T_k - \boldsymbol{\mu}_T)^\intercal\texttt{}$. The matrix $\mathbf{A}$ is a transposed matrix $\mathbf{X}$ of time series, where the first dimension is the number of the series, not the moment of time as in the case of $\mathbf{X}$. Then, consider what the elements of the matrices $\mathbf{\Sigma}$ and $\hat{\mathbf{\Sigma}}$ are equal to.
+\textbf{Proof.} Let us denote by $\mathbf{\Sigma}$ the true matrix at the moment of time $T$, and $\hat{\mathbf{\Sigma}}$ the predicted one. $\boldsymbol{\mu} = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t$. By construction, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (\mathbf{x}_k - \boldsymbol{\mu}_T)(\mathbf{x}_k - \boldsymbol{\mu}_T)^\intercal$. Then, consider what the elements of the matrices $\mathbf{\Sigma}$ and $\hat{\mathbf{\Sigma}}$ are equal to.
 \begin{align*}
-	&\mathbf{\Sigma}_{ij} = \frac{1}{T}\sum_{k=1}^{T}(\mathbf{a}_{ik} - \boldsymbol{\mu}_i)(\mathbf{a}_{jk}-\boldsymbol{\mu}_j),\\
+	&\mathbf{\Sigma}_{ij} = \frac{1}{T}\sum_{k=1}^{T}(\mathbf{x}_{ki} - \boldsymbol{\mu}_i)(\mathbf{x}_{kj}-\boldsymbol{\mu}_j),\\
     &\text{separating last term,}\\
-	&\hat{\mathbf{\Sigma}}_{ij} = \frac{1}{T}\sum_{k=1}^{T-1}(\mathbf{a}_{ik} - \hat{\boldsymbol{\mu}}_i)(\mathbf{a}_{jk}-\hat{\boldsymbol{\mu}}_j) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_j - \hat{\boldsymbol{\mu}}_j).
+	&\hat{\mathbf{\Sigma}}_{ij} = \frac{1}{T}\sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)(\mathbf{x}_{kj}-\hat{\boldsymbol{\mu}}_j) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_j - \hat{\boldsymbol{\mu}}_j).
 \end{align*}
 
 Since we minimise the norm of the difference, both matrices are equal to each other. Consider the equality of diagonal elements.
 \begin{gather*}
 	\text{For any } i, j \text{ such that } i = j \text{ the following is true: } \mathbf{\Sigma}_{ii} = \hat{\mathbf{\Sigma}}_{ii},\\
-	\sum_{k=1}^{T}(\mathbf{a}_{ik} - \boldsymbol{\mu}_i)(\mathbf{a}_{ik}-\boldsymbol{\mu}_i) = \sum_{k=1}^{T-1}(\mathbf{a}_{ik} - \hat{\boldsymbol{\mu}}_i)(\mathbf{a}_{ik}-\hat{\boldsymbol{\mu}}_i) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i),\\
+	\sum_{k=1}^{T}(\mathbf{x}_{ki}-\boldsymbol{\mu}_i)^{2} = \sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)^{2} + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)^{2},\\
 	\text{since } \boldsymbol{\mu}_i \text{ and } \hat{\boldsymbol{\mu}}_i \text{ are equal up to } (T-1) \text{-th coordinate,}\\
-	(\mathbf{a}_{iT}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.\\
+	(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.\\
 	\text{Consider } \hat{\boldsymbol{\mu}}_i \text{ and } \hat{\boldsymbol{\mu}}:\\
-	\hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik} + \frac{1}{T}\mathbf{y}_i,\\
-	\boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{a}_{ik}.\\
-	\text{Substitute the expressions for } \hat{\boldsymbol{\mu}} \text{ into } (\mathbf{a}_{iT}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2:\\
+	\hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki} + \frac{1}{T}\mathbf{y}_i,\\
+	\boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{x}_{ki}.\\
+	\text{Substitute the expressions for } \hat{\boldsymbol{\mu}} \text{ into } (\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2:\\
 	\left[
 	\begin{array}{ll}
-		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik}=\mathbf{a}_{iT}-\boldsymbol{\mu}_i
+		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki}=\mathbf{x}_{Ti}-\boldsymbol{\mu}_i
 		\\[1ex]
-		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{a}_{ik}=\boldsymbol{\mu}_i-\mathbf{a}_{iT}
+		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki}=\boldsymbol{\mu}_i-\mathbf{x}_{Ti}
 	\end{array},
 	\right .\\[1ex]
 	\text{Rewriting } \boldsymbol{\mu} \text{,}\\
 	\left[
 	\begin{array}{ll}
-		\frac{T-1}{T}\mathbf{y}_i = \frac{T-1}{T}\mathbf{a}_{iT}
+		\frac{T-1}{T}\mathbf{y}_i = \frac{T-1}{T}\mathbf{x}_{Ti}
 		\\[1ex]
-		\frac{T_1}{T}\mathbf{y}_i = \frac{2}{T} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \frac{T-1}{T}\mathbf{a}_{iT}
+		\frac{T_1}{T}\mathbf{y}_i = \frac{2}{T} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \frac{T-1}{T}\mathbf{x}_{Ti}
 	\end{array},
 	\right .\\[1ex]
 	\left[
 	\begin{array}{ll}
-		\mathbf{y}_i = \mathbf{a}_{iT}
+		\mathbf{y}_i = \mathbf{x}_{Ti}
 		\\[1ex]
-		\mathbf{y}_i = \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{a}_{iT}
+		\mathbf{y}_i = \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{x}_{Ti}
 	\end{array}.
 	\right .
 \end{gather*}
@@ -192,7 +191,7 @@ Since we minimise the norm of the difference, both matrices are equal to each ot
 Redefining, we obtain
 \begin{align*}
 	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
-	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{a}_{ik} - \mathbf{y}_i.
+	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i.
 \end{align*}
 $$ \blacksquare $$
 
