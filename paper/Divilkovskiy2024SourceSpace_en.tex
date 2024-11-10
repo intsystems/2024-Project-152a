@@ -36,13 +36,13 @@ The paper investigates a time series prediction problem. It constructs a pointwi
 \textbf{Keywords:} Metric Non-Convex Optimization, Time Series Forecasting, Singular Value Decomposition, Pearson Correlation Coefficient
 
 \section{Introduction}
- 	In this research the authors present a new method for pointwise time series prediction. Time series have high pairwise covariance and high variance. Pointwise prediction consists of calculating the values of the time series at the next point in time using the available historical data for the previous several points in time. A set of $d$ time series, each of which consists of $t$ time moments forms a multivariate time series. We call the multivariate time series space isomorphic to $\mathbb{R}^{d \times t}$ the source time series space. The prediction problem divides into three stages. First, transform the source space of the time series into a metric space by constructing a matrix of pairwise distances. Second, do the prediction of the pairwise distances matrix at the next moment of time in the metric space. Third, use the predicted matrix to reconstruct the result into the source space. In the theoretical part of the paper, we prove the necessity of predicting at least two matrices. We show that the uniqueness of the reconstructed result in the source space requires the use of several matrices corresponding to different time intervals. We focus mostly on the last step. We present experiments for the case of accurate matrix prediction and for the matrix prediction with the addition of normal noise to the values.
+ 	In this research, the authors present a new method for pointwise time series prediction. Time series have high pairwise covariance and high variance. Pointwise prediction consists of calculating the values of the time series at the next point in time using the available historical data for the previous several points in time. A set of $d$ time series, each of which consists of $t$ time moments forms a multivariate time series. We call the multivariate time series space isomorphic to $\mathbb{R}^{d \times t}$ the source time series space. The prediction problem divides into three stages. First, transform the source space of the time series into a metric space by constructing a matrix of pairwise distances. Second, do the prediction of the pairwise distances matrix at the next moment of time in the metric space. Third, use the predicted matrix to reconstruct the result into the source space. In the theoretical part of the paper, we prove the necessity of predicting at least two matrices. We show that the uniqueness of the reconstructed result in the source space requires the use of several matrices corresponding to different time intervals. We focus mostly on the last step. We present experiments for the case of accurate matrix prediction and for the matrix prediction with the addition of normal noise to the values.
 
-	Existing time series prediction methods such as LSTM \cite{LSTM}, SSA \cite{SSA} and other \cite{Biosignals, boyd2017multiperiod} predict the value of a univariate series. These methods can be modified to predict also a set of time series. For this purpose, it is sufficient to present a set of series as one multivariate series. This approach does not explicitly model the dependencies between different series. In contrast, we propose to analyze the change in \emph{set} of time series. Our approach explicitly uses the relationships between them as information. A similar study is carried out in the \cite{MulticorrelatedQuadratic} paper, but it emphasizes on the feature selection problem. It consists in selecting such a subset of the original time series for which it is possible to make a predict of sufficient quality.
+	Existing time series prediction methods such as LSTM \cite{LSTM}, SSA \cite{SSA} and other \cite{Biosignals, boyd2017multiperiod} predict the value of a univariate series. These methods can be modified to predict also a set of time series. For this purpose, it is sufficient to present a set of series as one multivariate series. This approach does not explicitly model the dependencies between different series. In contrast, we propose to analyze the change in \emph{set} of time series. Our approach explicitly uses the relationships between them as information. A similar study is carried out in the \cite{MulticorrelatedQuadratic} paper, but it emphasizes the feature selection problem. It consists in selecting such a subset of the original time series for which it is possible to make a prediction of sufficient quality.
 	
-	Recent studies \cite{haoyietal-informer-2021,haoyietal-informerEx-2023,wu2021autoformer,liu2022pyraformer} use popular transformer-based models. Transformer models were originally proposed for natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems deal with text as a sequence in time, the same approaches may be used for time series predicting. The Crossformer model \cite{zhang2023crossformer} uses cross-dimensional dependency.  However, it does not explicitly model the distance function between time series.
+	Recent studies \cite{haoyietal-informer-2021,haoyietal-informerEx-2023,wu2021autoformer,liu2022pyraformer} use transformer-based models. Transformer models were originally proposed for natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems deal with text as a sequence in time, the same approaches may be used for time series predicting. The Crossformer model \cite{zhang2023crossformer} uses cross-dimensional dependency.  However, it does not explicitly model the distance function between time series.
 	
-	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on pairwise correlation as a function of pairwise distance between rows. We use pairwise correlation because in the article \cite{puchkin2023sharper} the authors show that pairwise correlation estimate of a sample approximates its mathematical expectation. Correlation-based Algorithm is based on two theorems about the explicit form of the predictions in the time series space. Our algorithm does not require the use of non-convex optimization methods, which are computationally expensive \cite{mikhalevich2024methodsnonconvexoptimization}. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
+	Further, we study conditions on the distance function between series under which there is a way to reconstruct the values. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on pairwise correlation as a function of pairwise distance between series. We use pairwise correlation because in the article \cite{puchkin2023sharper} the authors show that the pairwise correlation estimate of a sample approximates its mathematical expectation. Correlation-based Algorithm is based on two theorems about the explicit form of the predictions in the time series space. Our algorithm does not require the use of non-convex optimization methods, which are computationally expensive \cite{mikhalevich2024methodsnonconvexoptimization}. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
 	
 	We show that Multidimentional Scaling Algorithm \cite{MDS} and Metric Multidimentional Scaling Algorithm \cite{inbook} cannot uniquely reconstruct the correlation matrix to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances.
 	
@@ -75,7 +75,7 @@ Construct distance matrices between a set of time series values according to the
 	&\vdots \\
 	[&\mathbf{x}_{t-s}, \ldots, \mathbf{x}_t] \rightarrow \mathbf{\Sigma}_{t}.
 \end{align*}
-Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between rows $i$ and $j$. We describe the construction formula as well as the choice of the distance function in the following sections.
+Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$. An element of the matrix $\mathbf{\Sigma}_{i,j}$ is the value of the distance between series $i$ and $j$. We describe the construction formula as well as the choice of the distance function in the following sections.
 
 Predict the matrix $\hat{\mathbf{\Sigma}}_{t+1}$ from matrices $\mathbf{\Sigma}_s, \mathbf{\Sigma}_{s+1} \ldots, \mathbf{\Sigma}_{t}$.
 
@@ -93,9 +93,9 @@ Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for mult
 \[\mathbf{\Sigma}_{i,j} = \rho((\mathbf{x}_{1 \ldots t, i}, \hat{\mathbf{x}}_{t+1, i}), (\mathbf{x}_{1 \ldots t, j}, \hat{\mathbf{x}}_{t+1, j})).\]
 
 One of the fundamental metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. With this example, we show that there can be several reconstructions with the same distance matrices. In the case of the Euclidean metric:
-\[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2},\]
+\[\mathbf{\Sigma}_{i,j} = \rho((\mathbf{x}_{1 \ldots t, i}, \hat{\mathbf{x}}_{t+1, i}), (\mathbf{x}_{1 \ldots t, j}, \hat{\mathbf{x}}_{t+1, j}))=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2},\]
 the number of answers is infinite.
-Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
+The use of this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
 \begin{gather*}
 	\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2} =\\
 	= \sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + [(\hat{\mathbf{x}}_{t+1, i} + C) -(\hat{\mathbf{x}}_{t+1, j} + C)]^2}.
@@ -120,10 +120,9 @@ In the theorem below we show that usage of only one matrix is insufficient for t
 
 \textbf{Proof}. We only have to show that the metric is not a bijection. This will mean that there are several different pairs of series whose distance between them is the same.
 
-Show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y} \Rightarrow \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
+Show that the metric is a continuous function. Take the sequence \[\{(\mathbf{x}_n, \mathbf{y}_n)\} \subset \mathbb{R}^t \times \mathbb{R}^t, (\mathbf{x}_n, \mathbf{y}_n) \to (\mathbf{x}, \mathbf{y}).\] Then, \[\mathbf{x}_n\to \mathbf{x}, \mathbf{y}_n\to \mathbf{y}, \text{therefore, } \rho(\mathbf{x}_n,\mathbf{x})\to 0 ,\rho(\mathbf{y}_n,\mathbf{y})\to 0,\] $n \to \infty.$ Using the triangle inequality for the metric, obtain \[\rho(\mathbf{x}_n,\mathbf{y}_n)\leqslant \rho(\mathbf{x}_n,\mathbf{x})+\rho(\mathbf{x},\mathbf{y})+\rho(\mathbf{y}_n,\mathbf{y})\to \rho(\mathbf{x},\mathbf{y}),\] therefore, $\rho(\mathbf{x}_n,\mathbf{y}_n)\to \rho(\mathbf{x},\mathbf{y})$.
 
-Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction.
-$\blacksquare$
+Therefore the metric is a continuous mapping from $\mathbb{R}^t \times \mathbb{R}^t$ to $\mathbb{R}$. We will show that such mapping cannot be a homeomorphism. Assume that $f: \mathbb{R} \to \mathbb{R}^t \times \mathbb{R}^t$ is the desired homeomorphism. Take arbitrary point $a \in \mathbb{R}$ and $f(a)$. Removing point $a$, $\mathbb{R}$ is no longer connected, but $\mathbb{R}^t \times \mathbb{R}^t$ is still connected. Therefore it is not a homeomorphism. We got a contradiction. \hfill$\blacksquare$
 
 \textbf{Note 2}. Essentially, the proof uses only the continuity of the function. This means that even non-metric continuous functions will give the multiplicity of the answer. For example, pairwise correlation of series is also a continuous function.
 
@@ -150,34 +149,30 @@ The pairwise distance matrix is constructed as follows:
 	\hat{\mathbf{y}}_i &= \mathbf{y}_i,\\
 	\hat{\mathbf{y}}_i &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i,
 \end{align*}
-\emph{where} $\hat{\mathbf{y}}_i$ \emph{is} $i$\emph{-th coordinate of the predicted value of the series at the moment $T+1$, $\mathbf{X}=(\mathbf{x}_{ki})$ is given multivariate time series,} $y_i$ \emph{are true values of the series at the moment} $T+1$.
+\emph{where} $\hat{\mathbf{y}}_i$ \emph{is} $i$\emph{-th coordinate of the predicted value of the series at the moment $T+1$, $\mathbf{X}=(\mathbf{x}_{ki})$ is given multivariate time series,} $y_i$ \emph{are actual values of the series at the moment} $T+1$.
 
-\textbf{Proof.} Let us denote by $\mathbf{\Sigma}$ the true matrix at the moment of time $T$, and $\hat{\mathbf{\Sigma}}$ the predicted one. $\boldsymbol{\mu} = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t$. By construction, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (\mathbf{x}_k - \boldsymbol{\mu}_T)(\mathbf{x}_k - \boldsymbol{\mu}_T)^\intercal$. Then, consider what the elements of the matrices $\mathbf{\Sigma}$ and $\hat{\mathbf{\Sigma}}$ are equal to.
+\textbf{Proof.} Denote by $\mathbf{\Sigma}$ the actual matrix at the moment of time $T$, and $\hat{\mathbf{\Sigma}}$ the predicted one. $\boldsymbol{\mu} = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t$. By construction, ${\mathbf{\Sigma}} = \frac{1}{T} \sum_{k=1}^{T} (\mathbf{x}_k - \boldsymbol{\mu}_T)(\mathbf{x}_k - \boldsymbol{\mu}_T)^\intercal$. Then, consider what the elements of the matrices $\mathbf{\Sigma}$ and $\hat{\mathbf{\Sigma}}$ are equal to.
 \begin{align*}
 	&\mathbf{\Sigma}_{ij} = \frac{1}{T}\sum_{k=1}^{T}(\mathbf{x}_{ki} - \boldsymbol{\mu}_i)(\mathbf{x}_{kj}-\boldsymbol{\mu}_j),\\
     &\text{separating last term,}\\
 	&\hat{\mathbf{\Sigma}}_{ij} = \frac{1}{T}\sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)(\mathbf{x}_{kj}-\hat{\boldsymbol{\mu}}_j) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_j - \hat{\boldsymbol{\mu}}_j).
 \end{align*}
 
-Since we minimise the norm of the difference, both matrices are equal to each other. The diagonal elements are equal in both matrices.
+Since we minimise the norm of the difference and the prediction is accurate, both matrices are equal to each other. The diagonal elements are equal in both matrices.
 
 For any $i, j$ such that $i = j$ the following is true: $\mathbf{\Sigma}_{ii} = \hat{\mathbf{\Sigma}}_{ii}$,
-
 $$\sum_{k=1}^{T}(\mathbf{x}_{ki}-\boldsymbol{\mu}_i)^{2} = \sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)^{2} + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)^{2},$$
 	
 since $\boldsymbol{\mu}_i$ and $\hat{\boldsymbol{\mu}}_i$ are equal up to (T-1)-th coordinate,
-
 $$(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.$$
 
 Consider $\hat{\boldsymbol{\mu}}_i$ and $\hat{\boldsymbol{\mu}}:$
-
 \begin{gather*}
 \hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki} + \frac{1}{T}\mathbf{y}_i,\\
 \boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{x}_{ki}.
 \end{gather*}
 
 Substitute the expressions for $\hat{\boldsymbol{\mu}}$ into $(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2:$
-
 $$
 	\left[
 	\begin{array}{ll}
@@ -189,7 +184,6 @@ $$
 $$
 
 Rewriting $\boldsymbol{\mu}$,
-
 $$
 	\left[
 	\begin{array}{ll}
@@ -214,12 +208,11 @@ Redefining, we obtain
 	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
 	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i.
 \end{align*}
-
-Which was to be shown.
+\hfill$\blacksquare$
 
 Figure \ref{fig:fig2} shows an example of a function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ with two minimum for certain time series.
 
-\textbf{Corollary. (A trivial method for obtaining a pair of possible solutions to the problem $\eqref{minimization}$.)} This theorem shows that using pairwise correlation as a distance function gives at most \emph{two} different solutions to the problem $\eqref{minimization}$ when reconstructing. Moreover, having obtained one, we can explicitly find the second one. Then, to find both possible answers, it is proposed to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
+\textbf{Corollary. (A trivial method for obtaining a pair of possible solutions to the problem $\eqref{minimization}$.)} This theorem shows that using pairwise correlation as a distance function gives at most \emph{two} different solutions to the problem $\eqref{minimization}$ when reconstructing. Moreover, if we obtained one, we can explicitly find the second one. Then, to find both possible answers, we propose to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
 
 The problem with the trivial method is the computational cost of non-convex optimization methods. As an alternative, we propose the following method using only singular matrix decomposition.
 
@@ -234,7 +227,7 @@ The problem with the trivial method is the computational cost of non-convex opti
 
 {\textbf{Theorem 3. (Efficient method for obtaining a pair of possible solutions to the problem $\eqref{minimization}$.)} \emph{ The minimum of the function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ is reached on \[\pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t,\] where $\lambda_1$ is the first singular value, $\mathbf{u}_1$ is the first left singular vector of matrix\\ $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$.}
 
-\textbf{Proof.} The notation $\mathbf{x}_i$ is used below to denote the \emph{multivariate} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ in terms of $\mathbf{\Sigma}_t$. After that, the operator norm and rank property of the matrix is used. All expressions below are true for arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition \eqref{distance_matrix}.
+\textbf{Proof.} $\mathbf{x}_i$ denotes the \emph{multivariate} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ in terms of $\mathbf{\Sigma}_t$. After that, we use the operator norm and rank property of the matrix. All expressions below are true for an arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition \eqref{distance_matrix}.
 \begin{enumerate}
 	\item Express $\boldsymbol{\mu}$ in terms of the values of the time series: \[\boldsymbol{\mu}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i, \text{therefore, } \sum_{i=1}^{t} \mathbf{x}_i = t \boldsymbol{\mu}_t.\]
 	\item Similarly, express $\mathbf{\Sigma_t}$ in terms of the values of the series:
@@ -253,7 +246,7 @@ The problem with the trivial method is the computational cost of non-convex opti
 		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal - \frac{t(t+1)}{(t+1)^2}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)^\intercal =\\
 		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{(t+1)^2}(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)(\mathbf{x}_{t+1}-\boldsymbol{\mu}_t)^\intercal.
 	\end{gather*}
-	This equality expresses $\mathbf{\Sigma}_{t+1}$ through $\mathbf{\Sigma}_t$. For further proof it is useful to derive the following equality for our problem: \[(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
+	This equality expresses $\mathbf{\Sigma}_{t+1}$ through $\mathbf{\Sigma}_t$. For the further proof it is useful to derive the following equality for our problem: \[(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
 	
 	\item We solve the problem of finding the minimum of the function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$. In our case, this is analogous to the equality of this function to zero. Let us write the expression under the norm:
 	\begin{gather*}
@@ -271,23 +264,22 @@ The problem with the trivial method is the computational cost of non-convex opti
  	\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t = \pm\sqrt{\lambda_1} \mathbf{u}_1 \Leftrightarrow\\
  	\bar{\mathbf{x}}_{t+1} = \pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t.
  	\]
- 	The sign $\pm$ comes from the fact that in the case of a symmetric matrix, there are two singular value decompositions: $\mathbf{A}=\mathbf{U}\mathbf{\Sigma} \mathbf{V}^\intercal=(-\mathbf{U})\mathbf{\Sigma} (-\mathbf{V})^\intercal$.
- 	$$ \blacksquare $$
+ 	The sign $\pm$ comes from the fact that in the case of a symmetric matrix, there are two singular value decompositions: $\mathbf{A}=\mathbf{U}\mathbf{\Sigma} \mathbf{V}^\intercal=(-\mathbf{U})\mathbf{\Sigma} (-\mathbf{V})^\intercal$. \hfill$\blacksquare$
 \end{enumerate}
 
 This theorem allows us to find both minimums of a function much faster than with standard non-convex optimisation methods.
 
 \section{Correlation-based Algorithm for reconstructing time series values in case of accurate matrix prediction}
 
-Theorems 2 and 3 show that using a \emph{single} pairwise correlation matrix and information about the first $t$ moments of time allows us to obtain a \emph{pair} of possible values after recovery. In this section, we propose a method to select the true value from the obtained \emph{pair} $\mathbf{\Sigma}_{t+1}$ \emph{predicted accurately}.
+Theorems 2 and 3 show that using a \emph{single} pairwise correlation matrix and information about the first $t$ moments of time allows us to obtain a \emph{pair} of possible values after recovery. In this section, we propose a method to select the one actual value from the obtained \emph{pair} if $\mathbf{\Sigma}_{t+1}$ is predicted accurately.
 
-The algorithm described below is based on the use of \emph{two} predicted matrices corresponding to different subsegments of time. Two different values $T, T^\prime$ are chosen. Two matrices are predicted:
+The Algorithm described below bases on the use of \emph{two} predicted matrices corresponding to different subsegments of time. We choose two different values $T, T^\prime$ and predict two matrices:
 
-The first matrix $\mathbf{\Sigma}_{t+1}^1$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
+The first matrix $\mathbf{\Sigma}_{t+1}^1$ is a pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
 
-The second matrix $\mathbf{\Sigma}_{t+1}^2$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T^\prime+2$ to $t+1$ (in total $T^\prime$ values).
+The second matrix $\mathbf{\Sigma}_{t+1}^2$ is a pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T^\prime+2$ to $t+1$ (in total $T^\prime$ values).
 
-Hence, when we reconstruct answers from these matrices, we obtain two pairs of answers, each of which is a candidate for the true answer. At the same time, a true answer exists in each of the pairs. We suggest to take the answer from the intersection. We does not consider the case when the intersection size is 2, since the probability of this situation is 0 when using continuous values.
+Hence, when we reconstruct answers from these matrices, we obtain two pairs of answers, each of which is a candidate for the actual answer. At the same time, the actual answer exists in each pair. We suggest to take the answer from the intersection. We does not consider the case when the intersection size is 2, since the probability of this situation is 0 when using continuous values.
 
 \textbf{Correlation-based Algorithm in case of accurate matrix prediction} scheme:
 \begin{enumerate}
@@ -313,7 +305,7 @@ The Figure \ref{fig:fig3} shows the example of reconstructed time series with ac
 
 The problem with the Algorithm is that if the matrix prediction is inaccurate, there may be no answer lies in the intersection. This happens because the error in each of the predicted matrices is different. For this, the following algorithm is proposed to amortize the error.
 
-Instead of two values of $T$ and $T^\prime$, we propose take $K$ values. We get $K$ matrices with some noise that came from inaccuracy in prediction. Thus, each matrix is reduced to the nearest positive semi-definite matrix. Algorithm is explained in the article \cite{HIGHAM1988103}.
+Instead of two values of $T$ and $T^\prime$, we propose taking $K$ values. We get $K$ matrices with some noise that came from the inaccuracy in prediction. Thus, each matrix is reduced to the nearest positive semi-definite matrix. Algorithm is explained in the article \cite{HIGHAM1988103}.
 Then, for each value algorithm for obtaining the pair of possible answers is applied.
 
 We get $K$ sets of answers:
@@ -339,14 +331,14 @@ The Figure \ref{fig:fig4} shows an example of reconstructing time series values 
 
 \section{Computational experiment}
 
-In this section we test the algorithm when the pairwise correlation matrix prediction from the previous section is inaccurate. Experiments are performed on synthetic data as well as on Electricity Transformer Temperature \cite{haoyietal-informer-2021} data. Different values of $K$ are tested, as well as different added noise to the true matrix values.
+In this section we test the algorithm when the pairwise correlation matrix prediction from the previous section is inaccurate. Experiments are performed on synthetic data as well as on Electricity Transformer Temperature \cite{haoyietal-informer-2021} data. Different values of $K$ are tested, as well as different added noise to the actual matrix values.
 
 \paragraph{Synthetic data.} The table below shows the error values after reconstruction the time series values under different conditions. Generated data consisting of a combination of noisy sines and cosines is used.
 
 \begin{table}[!h]
 \def\arraystretch{2.3}
 \begin{center}
-\caption{Error \eqref{loss} on synthetic data. As expected, the error is less on bigger $K$ value. See Figure \ref{fig:fig5} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
+\caption{Error \eqref{loss} on synthetic data. As expected, the error is less on larger $K$ value. See Figure \ref{fig:fig5} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
 \begin{tabular}{|l||l||*{3}{c|}}\hline
 	{Noise}
 	&\makebox[3em]{Metric}&\makebox[3em]{$K=2$}&\makebox[3em]{$K=4$}&\makebox[3em]{$K=10$}\\\hline
@@ -391,11 +383,9 @@ In all cases, using more different values of $T$ predictably gave the highest ac
 \end{table}
 
 \section{Conclusion}
-The paper investigates an approach to time series prediction using a pairwise correlation matrix between series. It is shown that the use of only one matrix leads to the existence of a pair of possible values of the series at the next moment of time. An explicit formula for computing one answer through the other is derived, which allows the problem to be solved using non-convex optimisation. Moreover, an explicit form of the pair of answers via the singular value decomposition of the pairwise correlation matrix is derived. Two algorithms are proposed to identify the desired answer from a pair of possible answers. The first one relies on the exact prediction of the pairwise correlation matrix. The second one admits the presence of an error in the prediction, but it is more computationally demanding.
+The paper investigates an approach to the time series prediction using a pairwise correlation matrix between series. It is shown that the use of only one matrix leads to the existence of a pair of possible values of the series at the next moment of time. An explicit formula for computing one answer through the other is derived, which allows the problem to be solved using non-convex optimisation. Moreover, an explicit form of the pair of answers via the singular value decomposition of the pairwise correlation matrix is derived. Two algorithms are proposed to identify the desired answer from a pair of possible answers. The first one relies on the exact prediction of the pairwise correlation matrix. The second one admits the presence of an error in the prediction, but it is more computationally demanding. As the computational experiments shows, to get more accurate predictions Algorithm require larger amount of different matrices.
 
-The future development of the study is to find a way to predict the pairwise correlation matrix with high accuracy. Using basic regression models give insufficiently accurate results. In such a prediction, errors are often made by incorrectly selecting the set of answers from Algorithm 2. 
-
-Also, the side of development can be the estimation of the error radius when reconstructing the value of time series from the matrix of pair correlations. In addition, it makes sense to consider other functions of pairwise distance as a metric.
+The future development of the study is to find a way to predict the pairwise correlation matrix with high accuracy. Basic regression models give insufficiently accurate results. In such a prediction, errors are often made by incorrectly selecting the set of answers from Algorithm 2. Other development may be to estimate the error radius when reconstructing the value of time series from the matrix of pair correlations. In addition, one may consider other functions of pairwise distance as a metric.
 
 
 \printbibliography
