@@ -17,8 +17,8 @@
 
 \author{%
 	Maxim Divilkovskiy\footnote{Forecsys, mdivilkovskij@gmail.com},  %
-	Konstantin Yakovlev\footnote{Forecsys,  bicst808@gmail.com},  %
 	Vadim Strijov\footnote{Forecsys,  strijov@gmail.com},  %
+	Konstantin Yakovlev\footnote{Forecsys,  bicst808@gmail.com},  %
 }
 %\date{}
 \hypersetup{pdfauthor={Maxim Divilkovskiy},}
@@ -28,7 +28,7 @@
 \maketitle
 
 \begin{abstract}
-The paper investigates a time series prediction problem. It constructs a pointwise prediction model for a set of time series. These time series have high variance and high covariance. Paper introduces space of pairwise distances between time series and analyses its properties. In this space, the pairwise distance matrix is predicted in its dynamics. The time series values are reconstructed at the next time moment with this matrix. The authors propose several methods for the pointwise prediction of time series space using the reconstruction reconstructed space of the pairwise distance matrices. We prove the existence of multiple time series values satisfying the same pairwise distance matrix. It presents two algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. The paper derives an explicit view of the reconstructed values through the pairwise correlation matrix. Also, it derives an evaluation of the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space but in the space of pairwise distances.
+The paper investigates a time series prediction problem. It constructs a pointwise prediction model for a set of time series. These time series have high variance and high covariance. Paper introduces space of pairwise distances between time series and analyzes its properties. In this space, the pairwise distance matrix is predicted in its dynamics. The time series values at the next time moment are reconstructed with this matrix. The authors propose several methods for the pointwise prediction of time series using the space of the pairwise distance matrices. We prove the existence of multiple time series values satisfying the same pairwise distance matrix. The paper presents two Algorithms based on the use of matrices constructed over different time intervals using pairwise correlation. We derive an explicit form of the reconstructed values in terms of the pairwise correlation matrix. Also, we evaluate the quality of the reconstruction when noise is added to the pairwise distance matrices. The novelty of the method is that the prediction is not done in the original space but in the space of pairwise distances.
 
 
 \end{abstract}
@@ -42,7 +42,7 @@ The paper investigates a time series prediction problem. It constructs a pointwi
 	
 	Recent studies \cite{haoyietal-informer-2021,haoyietal-informerEx-2023,wu2021autoformer,liu2022pyraformer} use popular transformer-based models. Transformer models were originally proposed for natural language processing problems, such as translation and text-completion \cite{NIPS2017_3f5ee243}. However, since many language problems deal with text as a sequence in time, the same approaches may be used for time series predicting. The Crossformer model \cite{zhang2023crossformer} uses cross-dimensional dependency.  However, it does not explicitly model the distance function between time series.
 	
-	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on two theorems about the explicit formula of the result in time series space using pairwise correlation as a function of pairwise distance between rows. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
+	Further, we study conditions on the distance function between rows under which there is a way to reconstruct the values of the time series. We prove the insufficiency of one matrix to reconstruct the answer. We propose two methods for the value prediction using several matrices for the case of accurate prediction and for the case of prediction with non-zero noise. Also, we propose a reconstruction algorithm based on pairwise correlation as a function of pairwise distance between rows. We use pairwise correlation because in the article \cite{puchkin2023sharper} the authors show that pairwise correlation estimate of a sample approximates its mathematical expectation. Correlation-based Algorithm is based on two theorems about the explicit form of the predictions in the time series space. Our algorithm does not require the use of non-convex optimization methods, which are computationally expensive \cite{mikhalevich2024methodsnonconvexoptimization}. Mean Squared Error and Mean Absolute Error are used as quality criteria. It is shown in the article \cite{jadon2022comprehensive} that they are the most suitable for the task of time series prediction.
 	
 	We show that Multidimentional Scaling Algorithm \cite{MDS} and Metric Multidimentional Scaling Algorithm \cite{inbook} cannot uniquely reconstruct the correlation matrix to the source time series space. This algorithm is often used to reconstruct objects from their pairwise distances.
 	
@@ -61,7 +61,7 @@ The prediction errors are calculated with two functions,
 \[
 \text{MAE} = \frac{1}{d}{\sum_{i=1}^{d} |\mathbf{x}_{t+1} - \mathbf{\hat{x}}_{t+1}|}, 
 \qquad \text{and} \qquad 
-\text{MSE} = \frac{1}{d}{\sum_{i=1}^{d} (\mathbf{x}_{t+1} - \mathbf{\hat{x}}_{t+1})^2}.
+\text{MSE} = \frac{1}{d}{\sum_{i=1}^{d} (\mathbf{x}_{t+1} - \mathbf{\hat{x}}_{t+1})^2}. \tag{*} \label{loss}
 \]
 
 \section{Reconstruction of time series by a predicted distance matrix}
@@ -79,7 +79,9 @@ Each $\mathbf{\Sigma}_i$ is a matrix of pairwise distances of size $d \times d$.
 
 Predict the matrix $\hat{\mathbf{\Sigma}}_{t+1}$ from matrices $\mathbf{\Sigma}_s, \mathbf{\Sigma}_{s+1} \ldots, \mathbf{\Sigma}_{t}$.
 
-Find such $\mathbf{\hat{x}}_{t+1}$, that \[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \rightarrow \min_{\mathbf{\hat{x}}_{t+1}}, \tag{1} \label{minimization}\] where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
+Find such $\mathbf{\hat{x}}_{t+1}$, that
+\[ ||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2 \rightarrow \min_{\mathbf{\hat{x}}_{t+1}}, \tag{1} \label{minimization}\] 
+where $\bar{\mathbf{\Sigma}}_{t+1}$ is the distance matrix, constructed from the set $[\mathbf{x}_{t-s+1}, \ldots, \mathbf{x}_{t}, \mathbf{\hat{x}}_{t+1}]$. Achieving a minimum by this function would mean that $\hat{\mathbf{\Sigma}}_{t+1}$ are $\bar{\mathbf{\Sigma}}_{t+1}$ equal. In turn, this means that the found continuation of the series at time $t+1$ has a distance matrix equal to the prediction. In general, this function is \emph{non-convex} and there can be several minimums. We address this problem in the following sections.
 
 \section{Existence of several values of a series satisfying same distance matrix}
 
@@ -92,7 +94,7 @@ Given a pairwise distance matrix $\mathbf{\Sigma}$ of size $d \times d$ for mult
 
 One of the fundamental metrics for calculating distance of objects in $\mathbb{R^d}$ is the Euclidean metric. With this example, we show that there can be several reconstructions with the same distance matrices. In the case of the Euclidean metric:
 \[\mathbf{\Sigma}_{i,j} = \rho(\mathbf{x}_{1 \ldots t, i} \circ \hat{\mathbf{x}}_{t+1, i}, \mathbf{x}_{1 \ldots t, j} \circ \hat{\mathbf{x}}_{t+1, j})=\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2},\]
-the number of answers is infinite, which we show below.
+the number of answers is infinite.
 Using this metric results in the fact that adding some constant $C$ to all $\hat{\mathbf{x}}_{t+1, i}$ does not change the answer:
 \begin{gather*}
 	\sqrt{\left(\sum_{k=1}^t (\mathbf{x}_{k,i}-\mathbf{x}_{k,j})^2\right) + (\hat{\mathbf{x}}_{t+1, i}-\hat{\mathbf{x}}_{t+1, j})^2} =\\
@@ -131,16 +133,19 @@ Now consider the same problem, in addition to the matrix $\mathbf{\Sigma}_{t+1}$
 
 \section{Pairwise correlation between time series}
 
-In this section we investigates the time series values reconstruction using the pairwise correlation matrix. This distance function is used because it is shown in the article \cite{puchkin2023sharper} that the pairwise correlation estimate of a sample approximates its mathematical expectation.
+In this section we investigates the time series values reconstruction using the pairwise correlation matrix. We use pairwise correlation as the distance function because its estimate of a sample approximates its mathematical expectation.
 
 The pairwise distance matrix is constructed as follows:
-\begin{gather*}
-	{\mathbf{\Sigma}}_T = \frac{1}{T} \sum_{t=1}^{T} (\mathbf{x}_t - \boldsymbol{\mu}_T)(\mathbf{x}_t - \boldsymbol{\mu}_T)^\mathsf{T},\\
-	\boldsymbol{\mu}_T = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t.
-\end{gather*}
 
-\textbf{Theorem 2.} \emph{In the case of accurately predicted distance matrix, the function} $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \emph{has two minimums, defined explicitly as follows:}
+\begin{subequations}
+	\begin{gather*}
+		{\mathbf{\Sigma}}_T = \frac{1}{T} \sum_{t=1}^{T} (\mathbf{x}_t - \boldsymbol{\mu}_T)(\mathbf{x}_t - \boldsymbol{\mu}_T)^\mathsf{T},\\
+		\boldsymbol{\mu}_T = \frac{1}{T} \sum_{t=1}^{T} \mathbf{x}_t.
+		\tag{2} \label{distance_matrix}
+	\end{gather*}
+\end{subequations}
 
+\textbf{Theorem 2.} \emph{In the case of accurately predicted distance matrix, the function}\\ $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ \emph{has two minimums, defined explicitly as follows:}
 \begin{align*}
 	\hat{\mathbf{y}}_i &= \mathbf{y}_i,\\
 	\hat{\mathbf{y}}_i &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i,
@@ -154,16 +159,26 @@ The pairwise distance matrix is constructed as follows:
 	&\hat{\mathbf{\Sigma}}_{ij} = \frac{1}{T}\sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)(\mathbf{x}_{kj}-\hat{\boldsymbol{\mu}}_j) + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)(\mathbf{y}_j - \hat{\boldsymbol{\mu}}_j).
 \end{align*}
 
-Since we minimise the norm of the difference, both matrices are equal to each other. Consider the equality of diagonal elements.
+Since we minimise the norm of the difference, both matrices are equal to each other. The diagonal elements are equal in both matrices.
+
+For any $i, j$ such that $i = j$ the following is true: $\mathbf{\Sigma}_{ii} = \hat{\mathbf{\Sigma}}_{ii}$,
+
+$$\sum_{k=1}^{T}(\mathbf{x}_{ki}-\boldsymbol{\mu}_i)^{2} = \sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)^{2} + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)^{2},$$
+	
+since $\boldsymbol{\mu}_i$ and $\hat{\boldsymbol{\mu}}_i$ are equal up to (T-1)-th coordinate,
+
+$$(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.$$
+
+Consider $\hat{\boldsymbol{\mu}}_i$ and $\hat{\boldsymbol{\mu}}:$
+
 \begin{gather*}
-	\text{For any } i, j \text{ such that } i = j \text{ the following is true: } \mathbf{\Sigma}_{ii} = \hat{\mathbf{\Sigma}}_{ii},\\
-	\sum_{k=1}^{T}(\mathbf{x}_{ki}-\boldsymbol{\mu}_i)^{2} = \sum_{k=1}^{T-1}(\mathbf{x}_{ki} - \hat{\boldsymbol{\mu}}_i)^{2} + (\mathbf{y}_i - \hat{\boldsymbol{\mu}}_i)^{2},\\
-	\text{since } \boldsymbol{\mu}_i \text{ and } \hat{\boldsymbol{\mu}}_i \text{ are equal up to } (T-1) \text{-th coordinate,}\\
-	(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2.\\
-	\text{Consider } \hat{\boldsymbol{\mu}}_i \text{ and } \hat{\boldsymbol{\mu}}:\\
-	\hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki} + \frac{1}{T}\mathbf{y}_i,\\
-	\boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{x}_{ki}.\\
-	\text{Substitute the expressions for } \hat{\boldsymbol{\mu}} \text{ into } (\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2:\\
+\hat{\boldsymbol{\mu}}_i = \frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki} + \frac{1}{T}\mathbf{y}_i,\\
+\boldsymbol{\mu}_i = \frac{1}{T}\sum_{k=1}^{T}\mathbf{x}_{ki}.
+\end{gather*}
+
+Substitute the expressions for $\hat{\boldsymbol{\mu}}$ into $(\mathbf{x}_{Ti}-\boldsymbol{\mu}_i)^2 = (\mathbf{y}_i-\hat{\boldsymbol{\mu}}_i)^2:$
+
+$$
 	\left[
 	\begin{array}{ll}
 		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki}=\mathbf{x}_{Ti}-\boldsymbol{\mu}_i
@@ -171,7 +186,11 @@ Since we minimise the norm of the difference, both matrices are equal to each ot
 		\frac{T-1}{T}\mathbf{y}_i-\frac{1}{T}\sum_{k=1}^{T-1}\mathbf{x}_{ki}=\boldsymbol{\mu}_i-\mathbf{x}_{Ti}
 	\end{array},
 	\right .\\[1ex]
-	\text{Rewriting } \boldsymbol{\mu} \text{,}\\
+$$
+
+Rewriting $\boldsymbol{\mu}$,
+
+$$
 	\left[
 	\begin{array}{ll}
 		\frac{T-1}{T}\mathbf{y}_i = \frac{T-1}{T}\mathbf{x}_{Ti}
@@ -179,6 +198,8 @@ Since we minimise the norm of the difference, both matrices are equal to each ot
 		\frac{T_1}{T}\mathbf{y}_i = \frac{2}{T} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \frac{T-1}{T}\mathbf{x}_{Ti}
 	\end{array},
 	\right .\\[1ex]
+$$
+$$
 	\left[
 	\begin{array}{ll}
 		\mathbf{y}_i = \mathbf{x}_{Ti}
@@ -186,43 +207,43 @@ Since we minimise the norm of the difference, both matrices are equal to each ot
 		\mathbf{y}_i = \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{x}_{Ti}
 	\end{array}.
 	\right .
-\end{gather*}
+$$
 
 Redefining, we obtain
 \begin{align*}
 	\hat{\mathbf{y}_i} &= \mathbf{y}_i,\\
 	\hat{\mathbf{y}_i} &= \frac{2}{T-1} \sum_{k=1}^{T-1} \mathbf{x}_{ki} - \mathbf{y}_i.
 \end{align*}
-$$ \blacksquare $$
+
+Which was to be shown.
 
 Figure \ref{fig:fig2} shows an example of a function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ with two minimum for certain time series.
 
-\textbf{Corollary. (A trivial method for obtaining a pair of possible answers.)} This theorem shows that using pairwise correlation as a distance function gives at most \emph{two} different answers when reconstructing. Moreover, having obtained one, we can explicitly find the second one. Then, to find both possible answers, it is proposed to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
+\textbf{Corollary. (A trivial method for obtaining a pair of possible solutions to the problem $\eqref{minimization}$.)} This theorem shows that using pairwise correlation as a distance function gives at most \emph{two} different solutions to the problem $\eqref{minimization}$ when reconstructing. Moreover, having obtained one, we can explicitly find the second one. Then, to find both possible answers, it is proposed to apply any non-convex optimisation method to find at least one of the minimum of the function. Therefore with the formula above we are able to find another minimum.
+
+The problem with the trivial method is the computational cost of non-convex optimization methods. As an alternative, we propose the following method using only singular matrix decomposition.
 
 \begin{figure}[!htbp]
 	\centering
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{NonConvex.eps}
 	\end{center}
-	\caption{Function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ for following series: $(1, 3)$ and $(2, 4)$. Minumums: (3; 4) is desired and (-1; 0) is alternative.}
+	\caption{The function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ for the following series: $(1, 3)$ and $(2, 4)$. Minumums: (3; 4) is desired and (-1; 0) is an alternative.}
 	\label{fig:fig2}
 \end{figure}
 
+{\textbf{Theorem 3. (Efficient method for obtaining a pair of possible solutions to the problem $\eqref{minimization}$.)} \emph{ The minimum of the function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ is reached on \[\pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t,\] where $\lambda_1$ is the first singular value, $\mathbf{u}_1$ is the first left singular vector of matrix\\ $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$.}
 
-The problem with this method is the computational cost of non-convex optimisation methods. As an alternative, we propose the following method using only singular matrix decomposition.
-
-{\textbf{Theorem 3. (Efficient method for obtaining a pair of possible answers.)} \emph{ The minimum of the function $||\hat{\mathbf{\Sigma}}_{t+1} - \bar{\mathbf{\Sigma}}_{t+1}||_2^2$ is reached on \[\pm\sqrt{\lambda_1} \mathbf{u}_1 + \boldsymbol{\mu}_t,\] where $\lambda_1$ is the first singular value, $\mathbf{u}_1$ is the first left singular vector of matrix $\mathbf{A}=\left(\hat{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}$}
-
-\textbf{Proof.} The notation $\mathbf{x}_i$ is used below to denote the \emph{multivariate} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ through $\mathbf{\Sigma}_t$. After that, the operator norm and rank property of the matrix is used. All expressions below are true for arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition above.
+\textbf{Proof.} The notation $\mathbf{x}_i$ is used below to denote the \emph{multivariate} value of the time series at time $i$. The proof expresses $\mathbf{\Sigma}_{t+1}$ in terms of $\mathbf{\Sigma}_t$. After that, the operator norm and rank property of the matrix is used. All expressions below are true for arbitrary $\boldsymbol{\mu}_T$ and $\mathbf{\Sigma}_T$ constructed by the definition \eqref{distance_matrix}.
 \begin{enumerate}
-	\item Express $\boldsymbol{\mu}$ through the values of the time series: \[\boldsymbol{\mu}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \Rightarrow \sum_{i=1}^{t} \mathbf{x}_i = t \boldsymbol{\mu}_t.\]
-	\item Similarly, express $\mathbf{\Sigma_t}$ through the values of the series:
+	\item Express $\boldsymbol{\mu}$ in terms of the values of the time series: \[\boldsymbol{\mu}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i, \text{therefore, } \sum_{i=1}^{t} \mathbf{x}_i = t \boldsymbol{\mu}_t.\]
+	\item Similarly, express $\mathbf{\Sigma_t}$ in terms of the values of the series:
 		\begin{gather*}
 		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} (\mathbf{x}_i-\boldsymbol{\mu}_t)(\mathbf{x}_i-\boldsymbol{\mu}_t)^\intercal;\\
-		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i\right) \boldsymbol{\mu}_t^\intercal - \boldsymbol{\mu}_t \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i^\intercal\right) + \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal =\\= \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal \Rightarrow\\
+		\mathbf{\Sigma}_t = \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i\right) \boldsymbol{\mu}_t^\intercal - \boldsymbol{\mu}_t \frac{1}{t} \left( \sum_{i=1}^{t} \mathbf{x}_i^\intercal\right) + \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal =\\= \frac{1}{t} \sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal - \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal, \text{therefore, }\\
 		\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal = t \mathbf{\Sigma}_t + t \boldsymbol{\mu}_t \boldsymbol{\mu}_t^\intercal.
 		\end{gather*}
-	\item Express $\mathbf{\Sigma_{t+1}}$ with $\mathbf{\Sigma_t}$ using the previous expressions:
+	\item Express $\mathbf{\Sigma_{t+1}}$ in terms of $\mathbf{\Sigma_t}$:
 	\begin{gather*}
 		\mathbf{\Sigma}_{t+1} = \frac{1}{t+1} \left(\sum_{i=1}^{t} \mathbf{x}_i \mathbf{x}_i^\intercal + \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal \right) - \boldsymbol{\mu}_{t+1} \boldsymbol{\mu}_{t+1}^\intercal = \\
 		= \frac{t}{t+1}\mathbf{\Sigma}_t + \frac{t}{t+1}\boldsymbol{\mu}_{t} \boldsymbol{\mu}_{t}^\intercal + \frac{1}{t+1} \mathbf{x}_{t+1} \mathbf{x}_{t+1}^\intercal - \frac{1}{(t+1)^2} (t \boldsymbol{\mu}_t + \mathbf{x}_{t+1})(t \boldsymbol{\mu}_t + \mathbf{x}_{t+1})^\intercal =\\
@@ -241,7 +262,7 @@ The problem with this method is the computational cost of non-convex optimisatio
  	\end{gather*}
  	Then, the problem above is equivalent to finding the minimum of the function \[||(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal-(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal||_2^2.\]
  	Denote \[\mathbf{A} = (\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\bar{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal = \left(\bar{\mathbf{\Sigma}}_{t+1} - \frac{t}{t+1} \cdot \mathbf{\Sigma}_t \right) \cdot \frac{(t+1)^2}{t}.\]
- 	The rank of the matrix ($\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$ is 1, and since the desired minimum is 0, it turns out that the rank of the matrix $\mathbf{A}$ is also 1.
+ 	The rank of the matrix ($\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)(\hat{\mathbf{x}}_{t+1}-\boldsymbol{\mu}_t)^\intercal$ equals 1, and since the desired minimum is 0, it turns out that the rank of the matrix $\mathbf{A}$ equals 1.
  	
  	\item From the previous paragraph, the matrix $\mathbf{A}$ has rank 1. Consider the singular value decomposition. \[
  		\mathbf{A} = \sum_{i=1}^{1} \lambda_i \mathbf{u}_i \mathbf{v}_i^\intercal = \lambda_1 \mathbf{u}_1 \mathbf{v}_1^\intercal.
@@ -254,22 +275,21 @@ The problem with this method is the computational cost of non-convex optimisatio
  	$$ \blacksquare $$
 \end{enumerate}
 
-This theorem allows us to find both minimums of a function much faster than with standard non-convex optimisation methods \cite{mikhalevich2024methodsnonconvexoptimization}.
+This theorem allows us to find both minimums of a function much faster than with standard non-convex optimisation methods.
 
-\section{Algorithm for reconstructing time series values in case of accurate prediction of the matrix}
+\section{Correlation-based Algorithm for reconstructing time series values in case of accurate matrix prediction}
 
 Theorems 2 and 3 show that using a \emph{single} pairwise correlation matrix and information about the first $t$ moments of time allows us to obtain a \emph{pair} of possible values after recovery. In this section, we propose a method to select the true value from the obtained \emph{pair} $\mathbf{\Sigma}_{t+1}$ \emph{predicted accurately}.
 
 The algorithm described below is based on the use of \emph{two} predicted matrices corresponding to different subsegments of time. Two different values $T, T^\prime$ are chosen. Two matrices are predicted:
 
-First matrix $\mathbf{\Sigma}_{t+1}^1$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
+The first matrix $\mathbf{\Sigma}_{t+1}^1$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T+2$ to $t+1$ (in total $T$ values).
 
-Second matrix $\mathbf{\Sigma}_{t+1}^2$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T‘+2$ to $t+1$ (in total $T^\prime$ values).
+The second matrix $\mathbf{\Sigma}_{t+1}^2$ pairwise correlation matrix for the multivariate time series $\mathbf{x}$ at time moments from $t-T^\prime+2$ to $t+1$ (in total $T^\prime$ values).
 
 Hence, when we reconstruct answers from these matrices, we obtain two pairs of answers, each of which is a candidate for the true answer. At the same time, a true answer exists in each of the pairs. We suggest to take the answer from the intersection. We does not consider the case when the intersection size is 2, since the probability of this situation is 0 when using continuous values.
 
-Algorithm scheme:
-
+\textbf{Correlation-based Algorithm in case of accurate matrix prediction} scheme:
 \begin{enumerate}
 	\item Take $T$ and $T^\prime: T \neq T'$.
 	\item For $T$ and $T^\prime$ perform the above algorithm and obtain the answer sets: 
@@ -280,20 +300,20 @@ Algorithm scheme:
 	In real data, the probability of matching sets of answers is 0, just as it is in synthetic data with random noise added.
 \end{enumerate}
 
-\ref{fig:fig3} shows the example of reconstructed time series with accurate predicted matrix. As you can see in the graph, the reconstruction is lossless.
+The Figure \ref{fig:fig3} shows the example of reconstructed time series with accurate predicted matrix. The reconstruction is lossless.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=\textwidth]{IdealRecovery.eps}
-	\caption{Prediction recovery in case of accurate prediction of correlation matrix $\mathbf{\Sigma}$. $T=20$, $T^\prime=10$}
+	\caption{Prediction recovery in case of accurate prediction of correlation matrix $\mathbf{\Sigma}$, where $T=20$, $T^\prime=10$}
 	\label{fig:fig3}
 \end{figure}
 
-\section{Algorithm for reconstructing time series values in case of inaccurate matrix prediction}
+\section{Correlation-based Algorithm for reconstructing time series values in case of inaccurate matrix prediction}
 
-The problem with the above algorithm is that if the prediction is inaccurate, there may be no intersection. This happens because the error in each of the predicted matrices is different. For this, the following algorithm is proposed to amortise the error:
+The problem with the Algorithm is that if the matrix prediction is inaccurate, there may be no answer lies in the intersection. This happens because the error in each of the predicted matrices is different. For this, the following algorithm is proposed to amortize the error.
 
-Instead of two values of $T$ and $T^\prime$, we propose take $K$ values. We get $K$ matrices with some noise that came from inaccuracy in prediction. Thus, each matrix is reduced to the nearest positive semi-definite matrix. Algorithm is explained in \cite{HIGHAM1988103}.
+Instead of two values of $T$ and $T^\prime$, we propose take $K$ values. We get $K$ matrices with some noise that came from inaccuracy in prediction. Thus, each matrix is reduced to the nearest positive semi-definite matrix. Algorithm is explained in the article \cite{HIGHAM1988103}.
 Then, for each value algorithm for obtaining the pair of possible answers is applied.
 
 We get $K$ sets of answers:
@@ -303,11 +323,12 @@ We get $K$ sets of answers:
 	\vdots \\
 	[\hat{\mathbf{x}}_{t+1}^K, \hat{\mathbf{x}}^{\prime K}_{t+1}].
 \end{gather*}
+
 Then we propose to search through $2^K$ sets of answers and choose the set in which the diameter is minimal. The diameter of set is calculated as maximum Euclidean distance between two different points in set. It is a \emph{necessary} condition for the actual answer. In the case of an accurate prediction, the diameter of such a set will always be zero.
 
 The asymptotic complexity of this reconstruction will be $O(2^K \times K \times N)$ $+$ the complexity of the minimum search algorithm used.
 
-On \ref{fig:fig4} you can see an example of reconstructing time series values when the predicted matrix contains some random noise. The reconstruction is no more lossless.
+The Figure \ref{fig:fig4} shows an example of reconstructing time series values when the predicted matrix contains some random noise. The reconstruction is no more lossless.
 
 \begin{figure}[!htbp]
 	\centering
@@ -316,7 +337,7 @@ On \ref{fig:fig4} you can see an example of reconstructing time series values wh
 	\label{fig:fig4}
 \end{figure}
 
-\section{Experiment}
+\section{Computational experiment}
 
 In this section we test the algorithm when the pairwise correlation matrix prediction from the previous section is inaccurate. Experiments are performed on synthetic data as well as on Electricity Transformer Temperature \cite{haoyietal-informer-2021} data. Different values of $K$ are tested, as well as different added noise to the true matrix values.
 
@@ -325,7 +346,7 @@ In this section we test the algorithm when the pairwise correlation matrix predi
 \begin{table}[!h]
 \def\arraystretch{2.3}
 \begin{center}
-\caption{Loss on synthetic data. As expected, the error is less on bigger $K$ value. See \ref{fig:fig5} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
+\caption{Error \eqref{loss} on synthetic data. As expected, the error is less on bigger $K$ value. See Figure \ref{fig:fig5} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
 \begin{tabular}{|l||l||*{3}{c|}}\hline
 	{Noise}
 	&\makebox[3em]{Metric}&\makebox[3em]{$K=2$}&\makebox[3em]{$K=4$}&\makebox[3em]{$K=10$}\\\hline
@@ -340,25 +361,25 @@ In this section we test the algorithm when the pairwise correlation matrix predi
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=\textwidth]{synthetic_time_series_K10N005.eps}
-	\caption{Synthetic data reconstruction plot at $K=10$, Additional noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.116, MSE: 0.025}}
+	\caption{Synthetic data reconstruction plot at $K=10$, Additional noise $\mathcal{N}(0, 0.05)$. \mbox{MAE: 0.116, MSE: 0.025}}
 	\label{fig:fig5}
 \end{figure}
 
-\paragraph{Electricity Transformer Temperature}\
+\paragraph{Electricity Transformer Temperature.} The following is a similar table for the Electricity Transformer Temperature dataset.
 
-The following is a similar table for the Electricity Transformer Temperature dataset.
+In all cases, using more different values of $T$ predictably gave the highest accuracy. However, for $K > 15$ the algorithm becomes too computationally complex due to the exponential dependence on $K$.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=\textwidth]{ETT_time_series_K10N005.eps}
-	\caption{ETTh1 data reconstruction plot at $K=10$, Additional Noise $\mathcal{N}(0, 0.05)$. \textbf{MAE: 0.096, MSE: 0.019}}
+	\caption{ETTh1 data reconstruction plot at $K=10$, Additional Noise $\mathcal{N}(0, 0.05)$. \mbox{MAE: 0.096, MSE: 0.019}}
 	\label{fig:fig6}
 \end{figure}
 
 \begin{table}[!h]
 \def\arraystretch{2.3}
 \begin{center}
-\caption{Loss on ETTh1 data. The same dependence of the error on the value of $K$ as on the synthetic data can be seen. See \ref{fig:fig6} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
+\caption{Error \eqref{loss} on ETTh1 data. The same dependence of the error on the value of $K$ as on the synthetic data can be seen. See Figure \ref{fig:fig6} for the example of reconstruction with $K=10$ and noise $\mathcal{N}(0, 0.05)$.}
 \begin{tabular}{|l||l||*{3}{c|}}\hline
 	{Noise}
 	&\makebox[3em]{Metric}&\makebox[3em]{$K=2$}&\makebox[3em]{$K=4$}&\makebox[3em]{$K=10$}\\\hline
@@ -368,9 +389,6 @@ The following is a similar table for the Electricity Transformer Temperature dat
 \end{tabular}
 \end{center}
 \end{table}
-
-
-In all cases, using more different values of $T$ predictably gave the highest accuracy. However, for $K > 15$ the algorithm becomes too computationally complex due to the exponential dependence on $K$.
 
 \section{Conclusion}
 The paper investigates an approach to time series prediction using a pairwise correlation matrix between series. It is shown that the use of only one matrix leads to the existence of a pair of possible values of the series at the next moment of time. An explicit formula for computing one answer through the other is derived, which allows the problem to be solved using non-convex optimisation. Moreover, an explicit form of the pair of answers via the singular value decomposition of the pairwise correlation matrix is derived. Two algorithms are proposed to identify the desired answer from a pair of possible answers. The first one relies on the exact prediction of the pairwise correlation matrix. The second one admits the presence of an error in the prediction, but it is more computationally demanding.

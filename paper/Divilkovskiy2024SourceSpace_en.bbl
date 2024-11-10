@@ -498,6 +498,72 @@
     \field{year}{2023}
   \endentry
 
+  \entry{puchkin2023sharper}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=PN}{%
+         family={Puchkin},
+         familyi={P\bibinitperiod},
+         given={Nikita},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=NF}{%
+         family={Noskov},
+         familyi={N\bibinitperiod},
+         given={Fedor},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SV}{%
+         family={Spokoiny},
+         familyi={S\bibinitperiod},
+         given={Vladimir},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PNNFSV1}
+    \strng{fullhash}{PNNFSV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/arXiv.2308.14739
+    \endverb
+    \field{title}{Sharper dimension-free bounds on the Frobenius distance
+  between sample covariance and its expectation}
+    \field{year}{2023}
+  \endentry
+
+  \entry{mikhalevich2024methodsnonconvexoptimization}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=MVS}{%
+         family={Mikhalevich},
+         familyi={M\bibinitperiod},
+         given={V.\bibnamedelima S.},
+         giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=GAM}{%
+         family={Gupal},
+         familyi={G\bibinitperiod},
+         given={A.\bibnamedelima M.},
+         giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=NVI}{%
+         family={Norkin},
+         familyi={N\bibinitperiod},
+         given={V.\bibnamedelima I.},
+         giveni={V\bibinitperiod\bibinitdelim I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MVSGAMNVI1}
+    \strng{fullhash}{MVSGAMNVI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/arXiv.2406.10406
+    \endverb
+    \field{title}{Methods of Nonconvex Optimization}
+    \field{eprintclass}{math.OC}
+    \field{year}{2024}
+  \endentry
+
   \entry{jadon2022comprehensive}{misc}{}
     \name{author}{3}{}{%
       {{hash=JA}{%
@@ -585,72 +651,6 @@
     \field{title}{Metric multidimensional scaling (MDS) and related methods}
     \field{month}{09}
     \field{year}{2021}
-  \endentry
-
-  \entry{puchkin2023sharper}{misc}{}
-    \name{author}{3}{}{%
-      {{hash=PN}{%
-         family={Puchkin},
-         familyi={P\bibinitperiod},
-         given={Nikita},
-         giveni={N\bibinitperiod},
-      }}%
-      {{hash=NF}{%
-         family={Noskov},
-         familyi={N\bibinitperiod},
-         given={Fedor},
-         giveni={F\bibinitperiod},
-      }}%
-      {{hash=SV}{%
-         family={Spokoiny},
-         familyi={S\bibinitperiod},
-         given={Vladimir},
-         giveni={V\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{PNNFSV1}
-    \strng{fullhash}{PNNFSV1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.48550/arXiv.2308.14739
-    \endverb
-    \field{title}{Sharper dimension-free bounds on the Frobenius distance
-  between sample covariance and its expectation}
-    \field{year}{2023}
-  \endentry
-
-  \entry{mikhalevich2024methodsnonconvexoptimization}{misc}{}
-    \name{author}{3}{}{%
-      {{hash=MVS}{%
-         family={Mikhalevich},
-         familyi={M\bibinitperiod},
-         given={V.\bibnamedelima S.},
-         giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod},
-      }}%
-      {{hash=GAM}{%
-         family={Gupal},
-         familyi={G\bibinitperiod},
-         given={A.\bibnamedelima M.},
-         giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-      {{hash=NVI}{%
-         family={Norkin},
-         familyi={N\bibinitperiod},
-         given={V.\bibnamedelima I.},
-         giveni={V\bibinitperiod\bibinitdelim I\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{MVSGAMNVI1}
-    \strng{fullhash}{MVSGAMNVI1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.48550/arXiv.2406.10406
-    \endverb
-    \field{title}{Methods of Nonconvex Optimization}
-    \field{eprintclass}{math.OC}
-    \field{year}{2024}
   \endentry
 
   \entry{HIGHAM1988103}{article}{}
