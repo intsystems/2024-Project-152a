@@ -15,11 +15,11 @@
 
 .. class:: center
 
-    :Название исследуемой задачи: Correlation-based Algorithm for pointwise predicting the value of a multivariate time series
-    :Тип научной работы: M1P/НИР/CoIS
-    :Автор: Maxim Divilkovskiy
-    :Научный руководитель: Vadim Strijov
-    :Научный консультант: Konstantin Yakovlev
+    :Title: Correlation-based Algorithm for pointwise predicting the value of a multivariate time series
+    :Project Type: M1P/CoIS
+    :Author: Maxim Divilkovskiy
+    :Supervisor: Vadim Strijov
+    :Advisor: Konstantin Yakovlev
 
 Abstract
 ========
